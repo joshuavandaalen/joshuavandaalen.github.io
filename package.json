@@ -1,0 +1,16 @@
+{
+  "name": "ddd-melbourne-retro",
+  "version": "1.0.0",
+  "description": "DDD Melbourne - 90s Geocities Style Edition",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["ddd", "melbourne", "conference", "90s", "retro", "geocities"],
+  "author": "DDD Melbourne",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
