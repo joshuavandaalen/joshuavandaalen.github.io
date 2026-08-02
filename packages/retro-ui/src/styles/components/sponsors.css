@@ -1,0 +1,306 @@
+/* === SPONSOR TIER ======================================================== */
+
+.retro-sponsor-tier {
+  margin: var(--retro-space-2xl) 0;
+}
+
+.retro-sponsor-tier__title {
+  font-size: var(--retro-text-3xl);
+  text-align: center;
+  padding: var(--retro-space-md);
+  margin-bottom: var(--retro-space-lg);
+  border: var(--retro-bevel-ridge-gold-md);
+  font-weight: bold;
+  text-shadow: 2px 2px 4px var(--retro-black);
+}
+
+.retro-sponsor-tier__title--diamond {
+  background: linear-gradient(
+    135deg,
+    var(--retro-tier-diamond-from) 0%,
+    var(--retro-tier-diamond-to) 100%
+  );
+  color: var(--retro-tier-diamond-ink);
+  animation: retro-diamond-shine var(--retro-duration-slow)
+    var(--retro-ease-in-out) infinite;
+}
+
+.retro-sponsor-tier__title--platinum {
+  background: linear-gradient(
+    135deg,
+    var(--retro-tier-platinum-from) 0%,
+    var(--retro-tier-platinum-to) 100%
+  );
+  color: var(--retro-tier-platinum-ink);
+}
+
+.retro-sponsor-tier__title--gold {
+  background: linear-gradient(
+    135deg,
+    var(--retro-tier-gold-from) 0%,
+    var(--retro-tier-gold-to) 100%
+  );
+  color: var(--retro-tier-gold-ink);
+}
+
+.retro-sponsor-tier__title--silver {
+  background: linear-gradient(
+    135deg,
+    var(--retro-tier-silver-from) 0%,
+    var(--retro-tier-silver-to) 100%
+  );
+  color: var(--retro-tier-silver-ink);
+}
+
+.retro-sponsor-tier__title--service {
+  background: linear-gradient(
+    135deg,
+    var(--retro-tier-service-from) 0%,
+    var(--retro-tier-service-to) 100%
+  );
+  color: var(--retro-tier-service-ink);
+}
+
+/* === SPONSOR GRID ======================================================== */
+
+.retro-sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(var(--retro-sponsor-min, 200px), 1fr)
+  );
+  gap: var(--retro-space-lg);
+  margin: var(--retro-space-lg) 0;
+  list-style: none;
+}
+
+.retro-sponsor-grid--single {
+  grid-template-columns: 1fr;
+  max-width: 400px;
+  margin: var(--retro-space-lg) auto;
+}
+
+/* === SPONSOR CARD ======================================================== */
+
+.retro-sponsor-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: var(--retro-bevel-outset-gold);
+  padding: var(--retro-space-lg);
+  text-align: center;
+  transition: all var(--retro-duration-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-sponsor-card:hover,
+.retro-sponsor-card:focus-within {
+  transform: scale(1.1) rotate(3deg);
+  border-style: inset;
+}
+
+.retro-sponsor-card__link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.retro-sponsor-card__name {
+  font-size: var(--retro-text-xl);
+  font-weight: bold;
+  color: var(--retro-navy);
+  margin: var(--retro-space-sm) 0;
+}
+
+.retro-sponsor-card__hover {
+  display: none;
+  color: var(--retro-red);
+  font-size: var(--retro-text-base);
+  margin-top: var(--retro-space-sm);
+}
+
+.retro-sponsor-card:hover .retro-sponsor-card__hover,
+.retro-sponsor-card:focus-within .retro-sponsor-card__hover {
+  display: block;
+  animation: retro-blink var(--retro-duration-quick) var(--retro-ease-blink)
+    infinite;
+}
+
+.retro-sponsor-card--diamond {
+  border-color: var(--retro-tier-diamond-to);
+  border-width: var(--retro-bevel-width-xl);
+  background: var(--retro-tier-diamond-card);
+}
+
+.retro-sponsor-card--diamond:hover {
+  box-shadow: 0 0 30px var(--retro-tier-diamond-to);
+  animation: retro-diamond-float var(--retro-duration-blink)
+    var(--retro-ease-in-out) infinite;
+}
+
+.retro-sponsor-card--platinum {
+  border-color: var(--retro-tier-platinum-to);
+  background: var(--retro-tier-platinum-card);
+}
+
+.retro-sponsor-card--gold {
+  border-color: var(--retro-tier-gold-from);
+  background: var(--retro-tier-gold-card);
+}
+
+.retro-sponsor-card--silver {
+  border-color: var(--retro-tier-silver-from);
+  background: var(--retro-tier-silver-card);
+}
+
+.retro-sponsor-card--service {
+  border-color: var(--retro-tier-service-to);
+  background: var(--retro-tier-service-card);
+}
+
+/* === SERVICE SPONSOR SECTION ============================================= */
+
+.retro-service-sponsors {
+  margin: var(--retro-space-lg) 0;
+  padding: var(--retro-space-md);
+  background: rgba(255, 255, 255, 0.2);
+  border: var(--retro-bevel-dashed-lime);
+  border-radius: var(--retro-radius-lg);
+}
+
+.retro-service-sponsors__category {
+  font-size: var(--retro-text-xl);
+  color: var(--retro-yellow);
+  text-align: center;
+  margin-bottom: var(--retro-space-md);
+  text-shadow: var(--retro-shadow-hard);
+}
+
+.retro-service-sponsors .retro-sponsor-grid {
+  --retro-sponsor-min: 150px;
+}
+
+/* === TITLE SPONSOR BANNER ================================================
+   Generalised from the site's hard-coded title-sponsor unit. Every colour it
+   used is now driven by `--retro-banner-accent`, so the same component can
+   carry any brand rather than exactly one. */
+
+.retro-title-banner {
+  --retro-banner-accent: #cc0000;
+  --retro-banner-accent-bright: #ff3333;
+  --retro-banner-accent-dark: #990000;
+
+  border: var(--retro-bevel-width-md) solid var(--retro-banner-accent);
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  padding: var(--retro-space-xs);
+  margin: var(--retro-space-sm) auto;
+  max-width: 600px;
+  box-shadow: 0 0 30px rgba(204, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: retro-banner-glow var(--retro-duration-slow)
+    var(--retro-ease-in-out) infinite;
+}
+
+.retro-title-banner__link {
+  text-decoration: none;
+  display: block;
+  color: var(--retro-white);
+}
+
+.retro-title-banner__logo-box {
+  text-align: center;
+  padding: var(--retro-space-md) var(--retro-space-sm) var(--retro-space-sm);
+  background: linear-gradient(180deg, rgba(204, 0, 0, 0.2), transparent);
+}
+
+.retro-title-banner__logo {
+  font-family: var(--retro-font-impact);
+  font-size: var(--retro-text-6xl);
+  font-weight: bold;
+  letter-spacing: var(--retro-tracking-widest);
+  color: var(--retro-white);
+  text-shadow: 0 0 10px var(--retro-banner-accent),
+    0 0 20px var(--retro-banner-accent-bright),
+    0 0 40px var(--retro-banner-accent), 3px 3px 0 var(--retro-banner-accent-dark);
+  animation: retro-logo-glow var(--retro-duration-slow) var(--retro-ease-in-out)
+    infinite alternate;
+  margin: 0;
+}
+
+.retro-title-banner__sublogo {
+  font-family: var(--retro-font-mono);
+  font-size: var(--retro-text-lg);
+  letter-spacing: var(--retro-tracking-wider);
+  color: #cccccc;
+  margin-top: var(--retro-space-2xs);
+  text-shadow: 0 0 8px rgba(204, 0, 0, 0.5);
+}
+
+.retro-title-banner__tagline {
+  background: var(--retro-banner-accent);
+  color: var(--retro-white);
+  font-family: var(--retro-font-display);
+  font-size: var(--retro-text-sm);
+  font-weight: bold;
+  padding: 4px 0;
+  text-shadow: 1px 1px 0 var(--retro-banner-accent-dark);
+}
+
+.retro-title-banner__details {
+  text-align: center;
+  padding: var(--retro-space-sm);
+  font-family: var(--retro-font-display);
+  font-size: var(--retro-text-sm);
+  color: #cccccc;
+}
+
+/* In the original this animated a keyframe name that was never defined, so
+   the call-to-action silently never blinked. It does now. */
+.retro-title-banner__cta {
+  color: #ffcc00;
+  font-weight: bold;
+  animation: retro-blink var(--retro-duration-blink) var(--retro-ease-blink)
+    infinite;
+}
+
+.retro-title-banner__badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px var(--retro-space-sm) 12px;
+  list-style: none;
+}
+
+.retro-title-banner__tier-title {
+  background: linear-gradient(
+    135deg,
+    var(--retro-banner-accent, #cc0000) 0%,
+    var(--retro-banner-accent-bright, #ff3333) 50%,
+    var(--retro-banner-accent, #cc0000) 100%
+  );
+  color: var(--retro-white);
+  font-size: var(--retro-text-3xl);
+  text-transform: uppercase;
+  letter-spacing: var(--retro-tracking-wide);
+  animation: retro-tier-pulse var(--retro-duration-normal)
+    var(--retro-ease-in-out) infinite;
+  border: var(--retro-bevel-width-sm) double #ffcc00;
+  padding: 8px var(--retro-space-lg);
+  display: inline-block;
+  text-shadow: 2px 2px 4px var(--retro-black);
+}
+
+@media (max-width: 768px) {
+  .retro-sponsor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-title-banner__logo {
+    font-size: var(--retro-text-4xl);
+    letter-spacing: var(--retro-tracking-wide);
+  }
+
+  .retro-title-banner__sublogo {
+    font-size: var(--retro-text-base);
+    letter-spacing: var(--retro-tracking-wide);
+  }
+}

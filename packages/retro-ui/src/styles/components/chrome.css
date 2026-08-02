@@ -1,0 +1,99 @@
+/* === WINDOWS 95/98 CHROME ================================================
+   The original repeated this dialog styling twice — once inside the adware
+   engine, once inline on the MIDI player — with slightly different greys.
+   Extracted once here so every widget in the kit sits in the same window. */
+
+.retro-window {
+  border: var(--retro-bevel-chrome-window);
+  box-shadow: var(--retro-shadow-window);
+  font-family: var(--retro-font-system);
+  background: var(--retro-chrome-face);
+}
+
+.retro-window__titlebar {
+  background: var(--retro-chrome-titlebar);
+  color: var(--retro-chrome-titlebar-ink);
+  font-size: var(--retro-text-xs);
+  font-weight: bold;
+  padding: 3px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.retro-window__title {
+  flex: 1;
+  padding-left: var(--retro-space-2xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.retro-window__controls {
+  display: flex;
+  gap: var(--retro-space-2xs);
+  flex-shrink: 0;
+}
+
+.retro-window__control {
+  width: 16px;
+  height: 14px;
+  background: var(--retro-chrome-face);
+  border: 1px outset var(--retro-chrome-highlight);
+  text-align: center;
+  line-height: 12px;
+  font-size: var(--retro-text-2xs);
+  cursor: pointer;
+  font-family: monospace;
+  font-weight: bold;
+  color: var(--retro-black);
+  padding: 0;
+}
+
+.retro-window__control:active {
+  border-style: inset;
+}
+
+.retro-window__control--close:hover {
+  background: var(--retro-red);
+  color: var(--retro-white);
+}
+
+.retro-window__body {
+  padding: var(--retro-space-sm);
+}
+
+/* === WINDOWS BUTTON ====================================================== */
+
+.retro-win95-button {
+  background: linear-gradient(180deg, var(--retro-chrome-highlight), var(--retro-chrome-face));
+  border: var(--retro-bevel-chrome-raised);
+  padding: var(--retro-space-2xs) var(--retro-space-sm);
+  cursor: pointer;
+  font-size: var(--retro-text-xs);
+  font-weight: bold;
+  font-family: var(--retro-font-system);
+  color: var(--retro-black);
+}
+
+.retro-win95-button:active {
+  border-style: inset;
+}
+
+.retro-win95-button:disabled {
+  color: var(--retro-chrome-shadow);
+  cursor: not-allowed;
+}
+
+.retro-win95-button--go {
+  background: var(--retro-lime);
+  color: var(--retro-white);
+  border: var(--retro-bevel-width-thin) outset var(--retro-chrome-highlight);
+}
+
+.retro-win95-button--stop {
+  background: var(--retro-red);
+  color: var(--retro-white);
+  border: var(--retro-bevel-width-thin) outset var(--retro-chrome-highlight);
+}

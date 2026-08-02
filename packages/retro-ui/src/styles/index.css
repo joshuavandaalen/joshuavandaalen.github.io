@@ -1,0 +1,7 @@
+/* Aggregate stylesheet — the order matters: tokens define the custom
+   properties everything else reads, and animations end with the reduced-motion
+   policy that must win last. */
+@import './tokens.css';
+@import './reset.css';
+@import './components.css';
+@import './animations.css';

@@ -1,0 +1,13 @@
+/* Component layer. Split by concern for authoring; bundled into one
+   `styles.css` at build time for the raw-CSS consumer path. */
+@import './components/layout.css';
+@import './components/typography.css';
+@import './components/marquee.css';
+@import './components/banners.css';
+@import './components/controls.css';
+@import './components/data.css';
+@import './components/sponsors.css';
+@import './components/schedule.css';
+@import './components/chrome.css';
+@import './components/widgets.css';
+@import './components/mascots.css';

@@ -1,0 +1,132 @@
+/* === STARFIELD =========================================================== */
+
+.retro-starfield {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-color: var(--retro-page-bg);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.03) 10px,
+    rgba(255, 255, 255, 0.03) 20px
+  );
+}
+
+.retro-starfield--hidden {
+  display: none;
+}
+
+.retro-starfield__star {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.85;
+}
+
+.retro-starfield--twinkle .retro-starfield__star {
+  animation: retro-twinkle var(--retro-star-duration, 3s) var(--retro-ease-in-out)
+    infinite;
+  animation-delay: var(--retro-star-delay, 0s);
+}
+
+/* === CONTAINER =========================================================== */
+
+.retro-container {
+  max-width: var(--retro-container-width);
+  margin: 0 auto;
+  padding: var(--retro-space-lg);
+  position: relative;
+  z-index: var(--retro-z-base);
+}
+
+/* === HEADER / FOOTER ===================================================== */
+
+.retro-site-header,
+.retro-site-footer {
+  background: var(--retro-gradient-royal);
+  border: var(--retro-bevel-ridge-gold);
+  text-align: center;
+}
+
+.retro-site-header {
+  padding: var(--retro-space-lg);
+  margin-bottom: var(--retro-space-2xl);
+}
+
+.retro-site-footer {
+  padding: var(--retro-space-2xl);
+  margin-top: var(--retro-space-3xl);
+}
+
+.retro-site-header__subtitle {
+  background: var(--retro-black);
+  border: var(--retro-bevel-width-thin) solid var(--retro-lime);
+  padding: var(--retro-space-sm);
+  margin: var(--retro-space-md) 0;
+  color: var(--retro-lime);
+  font-size: var(--retro-text-lg);
+  font-weight: bold;
+}
+
+/* === RAINBOW BAR ========================================================= */
+
+.retro-rainbow-bar {
+  height: var(--retro-rainbow-bar-height, 10px);
+  background: var(--retro-gradient-rainbow);
+  background-size: 200% 100%;
+  animation: retro-rainbow-scroll var(--retro-rainbow-bar-speed, 3s)
+    var(--retro-ease-linear) infinite;
+  margin: var(--retro-space-sm) 0;
+}
+
+/* === CONTENT BOX ========================================================= */
+
+.retro-content-box {
+  background: var(--retro-gradient-sky);
+  border: var(--retro-bevel-outset-gold-lg);
+  padding: var(--retro-space-xl);
+  margin: var(--retro-space-xl) 0;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+/* The blurred rainbow bleed behind every panel. Sits on a negative z-index,
+   so the box needs its own stacking context to avoid escaping behind the page. */
+.retro-content-box--halo::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--retro-bevel-width-lg) * -1);
+  background: var(--retro-gradient-rainbow-diagonal);
+  z-index: -1;
+  filter: blur(10px);
+  opacity: 0.5;
+}
+
+.retro-content-box--highlight {
+  background: var(--retro-gradient-sunset);
+}
+
+.retro-content-box--gold {
+  background: linear-gradient(45deg, #ffd700, #ffa500, #ffd700);
+}
+
+.retro-content-box--pulse {
+  animation: retro-box-pulse var(--retro-duration-slower) var(--retro-ease-in-out)
+    infinite;
+}
+
+/* === MISC LAYOUT ========================================================= */
+
+.retro-center {
+  text-align: center;
+  margin: var(--retro-space-lg) 0;
+}
+
+@media (max-width: 768px) {
+  .retro-container {
+    padding: var(--retro-space-sm);
+  }
+}

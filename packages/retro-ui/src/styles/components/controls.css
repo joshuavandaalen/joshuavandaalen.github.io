@@ -1,0 +1,169 @@
+/* === COOL BUTTON =========================================================
+   The perspective tilt is the whole point: a flat button reads as modern, a
+   button leaning back five degrees reads as 1997. */
+
+.retro-cool-button {
+  display: inline-block;
+  background: var(--retro-gradient-fire);
+  color: var(--retro-white);
+  padding: var(--retro-space-md) var(--retro-space-2xl);
+  font-family: var(--retro-font-display);
+  font-size: var(--retro-text-xl);
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  border: var(--retro-bevel-outset-gold);
+  box-shadow: var(--retro-shadow-drop);
+  transform: perspective(500px) rotateX(5deg);
+  transition: all var(--retro-duration-fast);
+  cursor: pointer;
+}
+
+.retro-cool-button:hover,
+.retro-cool-button:focus-visible {
+  transform: perspective(500px) rotateX(-5deg) scale(1.1);
+  box-shadow: var(--retro-shadow-drop-lg);
+  background: var(--retro-gradient-fire-hot);
+}
+
+.retro-cool-button:active {
+  border-style: inset;
+}
+
+.retro-cool-button--float {
+  animation: retro-button-float var(--retro-duration-slower)
+    var(--retro-ease-in-out) infinite;
+}
+
+.retro-cool-button--sm {
+  font-size: var(--retro-text-base);
+  padding: 8px var(--retro-space-md);
+}
+
+.retro-cool-button--lg {
+  font-size: var(--retro-text-2xl);
+  padding: var(--retro-space-lg) var(--retro-space-3xl);
+}
+
+.retro-cool-button--gold {
+  background: linear-gradient(135deg, var(--retro-gold), #ffa500);
+  color: var(--retro-navy);
+}
+
+.retro-cool-button--diamond {
+  background: linear-gradient(
+    135deg,
+    var(--retro-tier-diamond-from),
+    var(--retro-tier-diamond-to)
+  );
+  color: var(--retro-tier-diamond-ink);
+  border-color: var(--retro-tier-diamond-to);
+}
+
+.retro-cool-button--grass {
+  background: var(--retro-gradient-grass);
+  border-color: #8bc34a;
+}
+
+.retro-cool-button[aria-disabled='true'],
+.retro-cool-button:disabled {
+  background: #999999;
+  border-color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  animation: none;
+}
+
+/* === NAV BAR ============================================================= */
+
+.retro-nav-bar {
+  display: flex;
+  justify-content: center;
+  gap: var(--retro-space-sm);
+  margin: var(--retro-space-lg) 0;
+  flex-wrap: wrap;
+}
+
+.retro-nav-button {
+  background: var(--retro-gradient-grass);
+  color: var(--retro-white);
+  padding: 12px var(--retro-space-xl);
+  font-family: var(--retro-font-display);
+  text-decoration: none;
+  font-weight: bold;
+  border: var(--retro-bevel-width-md) outset #8bc34a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all var(--retro-duration-fast);
+  font-size: var(--retro-text-md);
+  cursor: pointer;
+}
+
+.retro-nav-button:hover,
+.retro-nav-button:focus-visible {
+  background: linear-gradient(135deg, #45a049 0%, #4caf50 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  border-style: inset;
+}
+
+.retro-nav-button--active {
+  background: var(--retro-gradient-amber);
+  border-color: #ffb74d;
+  animation: retro-active-pulse var(--retro-duration-slow)
+    var(--retro-ease-in-out) infinite;
+}
+
+.retro-nav-button[aria-disabled='true'],
+.retro-nav-button:disabled {
+  background: #999999;
+  border-color: #666666;
+  cursor: not-allowed;
+  opacity: 0.6;
+  animation: none;
+}
+
+.retro-nav-button[aria-disabled='true']:hover,
+.retro-nav-button:disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* === FOOTER LINKS ======================================================== */
+
+.retro-footer-links {
+  margin: var(--retro-space-lg) 0;
+  font-size: var(--retro-text-lg);
+}
+
+.retro-footer-links__link {
+  color: var(--retro-yellow);
+  text-decoration: none;
+  font-weight: bold;
+  padding: var(--retro-space-xs) var(--retro-space-sm);
+  transition: all var(--retro-duration-fast);
+}
+
+.retro-footer-links__link:hover,
+.retro-footer-links__link:focus-visible {
+  background: var(--retro-yellow);
+  color: var(--retro-navy);
+  text-decoration: underline;
+}
+
+.retro-footer-links__separator {
+  color: var(--retro-white);
+  margin: 0 var(--retro-space-sm);
+}
+
+@media (max-width: 768px) {
+  .retro-nav-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .retro-nav-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}

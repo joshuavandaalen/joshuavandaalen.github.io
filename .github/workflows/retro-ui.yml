@@ -1,0 +1,61 @@
+name: retro-ui
+
+# Build, typecheck and test the UI kit. There is deliberately no publish job:
+# the package is still `private` and unnamed, and stays that way until release.
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'packages/retro-ui/**'
+      - '.github/workflows/retro-ui.yml'
+      - 'package.json'
+  pull_request:
+    paths:
+      - 'packages/retro-ui/**'
+      - '.github/workflows/retro-ui.yml'
+      - 'package.json'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck --workspace packages/retro-ui
+
+      - name: Test
+        run: npm run test --workspace packages/retro-ui
+
+      - name: Build
+        run: npm run build --workspace packages/retro-ui
+
+      - name: Build Storybook
+        run: npm run build-storybook --workspace packages/retro-ui
+
+      # `npm publish --workspace` SKIPS a private package and still exits 0, so
+      # a plain exit-code check would pass whether or not the guard held. Assert
+      # the field itself, and confirm npm agrees it is skipping.
+      - name: Assert the package cannot be published
+        run: |
+          node -e "
+            const pkg = require('./packages/retro-ui/package.json');
+            if (pkg.private !== true) {
+              console.error('::error::retro-ui must stay private until a package name is chosen for release.');
+              process.exit(1);
+            }
+            console.log('package.json private: true');
+          "
+          npm publish --dry-run --workspace packages/retro-ui 2>&1 | tee /tmp/publish.log
+          if ! grep -q 'marked as private' /tmp/publish.log; then
+            echo "::error::npm did not report the package as private — it may be publishable."
+            exit 1
+          fi
+          echo "Publish correctly skipped: package is private."

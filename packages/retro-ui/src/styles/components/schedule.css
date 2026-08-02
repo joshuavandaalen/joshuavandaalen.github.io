@@ -1,0 +1,339 @@
+/* === SCHEDULE TABLE ======================================================
+   A real `<table>` for real tabular data. The 90s used tables for layout,
+   which was wrong; a conference grid is one of the few places a table is
+   actually correct, so this keeps the look and fixes the semantics. */
+
+.retro-schedule-wrapper {
+  overflow-x: auto;
+  margin: var(--retro-space-2xl) 0;
+  border: var(--retro-bevel-ridge-gold);
+  background: var(--retro-white);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+}
+
+.retro-schedule {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--retro-bevel-solid-navy);
+  background: var(--retro-white);
+  font-family: var(--retro-font-display);
+}
+
+.retro-schedule__caption {
+  padding: var(--retro-space-sm);
+  font-weight: bold;
+  color: var(--retro-navy);
+  background: var(--retro-gold);
+}
+
+.retro-schedule__head th {
+  padding: var(--retro-space-md) var(--retro-space-sm);
+  border: var(--retro-bevel-width-sm) outset var(--retro-gold);
+  color: var(--retro-white);
+  font-weight: bold;
+  font-size: var(--retro-text-md);
+  text-shadow: 2px 2px 4px var(--retro-black);
+  background: var(--retro-gradient-royal);
+}
+
+.retro-schedule__head th.retro-schedule__time-col {
+  width: 100px;
+  background: linear-gradient(135deg, var(--retro-magenta) 0%, #8b008b 100%);
+}
+
+.retro-schedule__head th.retro-schedule__track-col {
+  min-width: 180px;
+}
+
+.retro-schedule tbody tr {
+  border-bottom: var(--retro-bevel-width-thin) solid var(--retro-navy);
+}
+
+.retro-schedule__row {
+  transition: all var(--retro-duration-fast);
+}
+
+.retro-schedule__row:hover {
+  background: rgba(255, 255, 0, 0.2);
+}
+
+/* === TIME CELL =========================================================== */
+
+.retro-schedule__time {
+  padding: var(--retro-space-md) var(--retro-space-sm);
+  border: var(--retro-bevel-width-thin) inset var(--retro-silver);
+  background: var(--retro-schedule-time);
+  color: #4a148c;
+  font-weight: bold;
+  font-size: var(--retro-text-md);
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.retro-schedule__duration {
+  display: block;
+  font-size: var(--retro-text-xs);
+  color: #7b1fa2;
+  font-style: italic;
+  margin-top: var(--retro-space-xs);
+}
+
+/* === EVENT CELLS ========================================================= */
+
+.retro-schedule__cell {
+  padding: var(--retro-space-md);
+  border: var(--retro-bevel-width-thin) solid var(--retro-silver);
+  background: #f5f5f5;
+  vertical-align: middle;
+}
+
+.retro-schedule__row--special .retro-schedule__cell {
+  background: var(--retro-schedule-special);
+  text-align: center;
+}
+
+.retro-schedule__cell--full-width {
+  background: var(--retro-schedule-full-width);
+}
+
+.retro-schedule__event-title {
+  font-size: var(--retro-text-xl);
+  font-weight: bold;
+  color: #1b5e20;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.retro-schedule__event-location {
+  font-size: var(--retro-text-base);
+  color: #2e7d32;
+  font-style: italic;
+  margin-top: var(--retro-space-xs);
+}
+
+.retro-schedule__event-desc {
+  font-size: var(--retro-text-base);
+  color: #1b5e20;
+  margin-top: var(--retro-space-xs);
+}
+
+/* Changeover — the five minutes of corridor shuffling between talks. */
+.retro-schedule__row--changeover .retro-schedule__cell {
+  background: var(--retro-schedule-changeover);
+  text-align: center;
+  padding: var(--retro-space-sm);
+}
+
+.retro-schedule__changeover-text {
+  font-size: var(--retro-text-base);
+  font-weight: bold;
+  color: #212121;
+  font-style: italic;
+}
+
+/* Party. */
+.retro-schedule__row--party .retro-schedule__cell {
+  background: var(--retro-schedule-party);
+  animation: retro-party-pulse var(--retro-duration-normal)
+    var(--retro-ease-in-out) infinite;
+}
+
+.retro-schedule__row--party .retro-schedule__event-title,
+.retro-schedule__row--party .retro-schedule__event-location,
+.retro-schedule__row--party .retro-schedule__event-desc {
+  color: var(--retro-white);
+  text-shadow: 2px 2px 4px var(--retro-black);
+}
+
+/* === TRACK TINTS ========================================================= */
+
+.retro-schedule__cell--track-1 {
+  background: var(--retro-track-1);
+}
+.retro-schedule__cell--track-2 {
+  background: var(--retro-track-2);
+}
+.retro-schedule__cell--track-3 {
+  background: var(--retro-track-3);
+}
+.retro-schedule__cell--track-4 {
+  background: var(--retro-track-4);
+}
+.retro-schedule__cell--track-5 {
+  background: var(--retro-track-5);
+}
+
+/* === SESSION CARD ======================================================== */
+
+.retro-session-card {
+  padding: var(--retro-space-sm);
+  border: var(--retro-bevel-width-sm) groove #9c27b0;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all var(--retro-duration-fast);
+  text-align: left;
+}
+
+.retro-session-card--interactive {
+  cursor: pointer;
+}
+
+.retro-session-card--interactive:hover,
+.retro-session-card--interactive:focus-visible {
+  transform: rotate(-2deg) scale(1.05);
+  box-shadow: 0 0 15px rgba(156, 39, 176, 0.6);
+  border-style: ridge;
+}
+
+.retro-session-card__title {
+  font-weight: bold;
+  font-size: var(--retro-text-md);
+  color: #4a148c;
+  margin-bottom: 8px;
+}
+
+.retro-session-card__speaker {
+  font-size: var(--retro-text-sm);
+  color: #7b1fa2;
+  font-style: italic;
+}
+
+.retro-session-card__location {
+  font-size: var(--retro-text-sm);
+  color: #2e7d32;
+  font-style: italic;
+  margin-top: var(--retro-space-xs);
+}
+
+.retro-session-card--lightning {
+  border-color: #ffeb3b;
+  background: var(--retro-schedule-lightning);
+}
+
+.retro-session-card--lightning .retro-session-card__title {
+  color: #f57f17;
+}
+
+.retro-session-card--lightning .retro-session-card__speaker {
+  color: #f9a825;
+}
+
+.retro-session-card--lightning:hover {
+  animation: retro-lightning-flash var(--retro-duration-quick)
+    var(--retro-ease-in-out);
+}
+
+.retro-session-card--keynote {
+  border-color: #ff5722;
+  border-width: var(--retro-bevel-width-md);
+  background: var(--retro-schedule-keynote);
+}
+
+.retro-session-card--keynote .retro-session-card__title {
+  color: #bf360c;
+  font-size: var(--retro-text-md);
+}
+
+.retro-session-card--keynote .retro-session-card__speaker {
+  color: #d84315;
+}
+
+.retro-session-card--keynote:hover {
+  box-shadow: 0 0 25px rgba(255, 87, 34, 0.8);
+}
+
+/* === RESPONSIVE ========================================================== */
+
+@media (max-width: 1024px) {
+  .retro-schedule {
+    font-size: var(--retro-text-base);
+  }
+
+  .retro-schedule__head th {
+    padding: var(--retro-space-sm) var(--retro-space-xs);
+    font-size: var(--retro-text-base);
+  }
+
+  .retro-schedule__head th.retro-schedule__track-col {
+    min-width: 150px;
+  }
+
+  .retro-session-card__title {
+    font-size: var(--retro-text-sm);
+  }
+
+  .retro-session-card__speaker {
+    font-size: var(--retro-text-xs);
+  }
+}
+
+@media (max-width: 768px) {
+  .retro-schedule-wrapper {
+    border: var(--retro-bevel-width-sm) ridge var(--retro-gold);
+  }
+
+  .retro-schedule {
+    font-size: var(--retro-text-xs);
+  }
+
+  .retro-schedule__head th {
+    padding: 8px var(--retro-space-sm);
+    font-size: var(--retro-text-xs);
+  }
+
+  .retro-schedule__head th.retro-schedule__time-col {
+    width: 70px;
+  }
+
+  .retro-schedule__head th.retro-schedule__track-col {
+    min-width: 120px;
+  }
+
+  .retro-schedule__cell {
+    padding: var(--retro-space-sm) var(--retro-space-xs);
+  }
+
+  .retro-schedule__event-title {
+    font-size: var(--retro-text-md);
+  }
+}
+
+/* === PRINT ===============================================================
+   Conference schedules get printed and pinned to lanyards. Everything
+   decorative drops away and the grid goes black-on-white. */
+
+@media print {
+  .retro-starfield,
+  .retro-browser-banner,
+  .retro-flash-banner,
+  .retro-nav-bar,
+  .retro-site-footer,
+  .retro-midi-player,
+  .retro-darkmode-toggle,
+  .retro-squirrel-track,
+  .retro-unicorn,
+  .retro-unicorn-trail-dot,
+  .retro-narwhal-scene,
+  .retro-adware-overlay {
+    display: none !important;
+  }
+
+  .retro-schedule-wrapper {
+    border: var(--retro-bevel-width-thin) solid var(--retro-black);
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .retro-schedule {
+    border: var(--retro-bevel-width-thin) solid var(--retro-black);
+  }
+
+  .retro-schedule th,
+  .retro-schedule td,
+  .retro-session-card {
+    border: 1px solid var(--retro-black) !important;
+    background: var(--retro-white) !important;
+    color: var(--retro-black) !important;
+    text-shadow: none !important;
+  }
+}

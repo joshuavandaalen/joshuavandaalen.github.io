@@ -1,0 +1,54 @@
+/* ============================================================================
+   RETRO UI — SCOPED RESET
+   ----------------------------------------------------------------------------
+   Deliberately NOT a global `* { margin: 0 }` like the original. A component
+   library has no business resetting a consumer's whole page, so this scopes to
+   the kit's own surfaces and to anything inside `.retro-root`.
+   ========================================================================= */
+
+.retro-root {
+  font-family: var(--retro-font-display);
+  color: var(--retro-page-ink);
+  background-color: var(--retro-page-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.retro-root *,
+.retro-root *::before,
+.retro-root *::after {
+  box-sizing: border-box;
+}
+
+.retro-root h1,
+.retro-root h2,
+.retro-root h3,
+.retro-root h4,
+.retro-root h5,
+.retro-root h6,
+.retro-root p,
+.retro-root figure,
+.retro-root blockquote {
+  margin: 0;
+}
+
+.retro-root ul,
+.retro-root ol {
+  margin: 0;
+  padding: 0;
+}
+
+/* Utility: visually hidden but available to assistive technology. Used for the
+   text alternatives that let purely decorative chaos stay decorative. */
+.retro-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
