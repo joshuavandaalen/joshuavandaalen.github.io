@@ -1,0 +1,69 @@
+name: Deploy to GitHub Pages
+
+# Publishes the development website:
+#   /       the DevOps Dojo quiz (the demo app for the retro-ui kit)
+#   /retro  the original DDD Melbourne 90s site, preserved
+#
+# NOTE: this requires Settings → Pages → Source = "GitHub Actions".
+# A workflow cannot set that itself; deployment fails until it is set.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it mid-publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build the UI kit
+        run: npm run build --workspace packages/retro-ui
+
+      - name: Build the quiz app
+        run: npm run build --workspace apps/quiz
+
+      - name: Assemble the site
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          cp -r apps/quiz/dist/. dist/
+          node scripts/build-retro-site.mjs dist/retro
+
+      # Pages would otherwise run the output through Jekyll, which ignores
+      # files and directories beginning with an underscore.
+      - name: Disable Jekyll processing
+        run: touch dist/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

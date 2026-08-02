@@ -166,3 +166,24 @@ shipped a genuinely bad component:
   and `'a'`, so the code silently failed with caps lock on.
 - **Table semantics.** The schedule had no `<caption>` and no `scope` on any
   header. Time cells are now `<th scope="row">`, tracks `<th scope="col">`.
+
+## Gaps the demo app exposed
+
+Building a real app on the kit (`apps/quiz`) surfaced things that reading the
+component source did not:
+
+- **No form controls existed at all.** All 48 original exports are display,
+  layout, chrome, mascots or audio — nothing selectable, no progress
+  indicator, no result display, no input. A quiz could not be built without
+  adding `AnswerList`, `ProgressMeter`, `FeedbackPanel` and `ScorePanel`.
+  These are the only components in the kit not extracted from the 90s site.
+- **`CoolButton float` made an unclickable target.** A perpetually animating
+  button never holds still: harder to hit with a mouse, materially harder with
+  a motor impairment, and Playwright refuses to click it at all. The kit now
+  cancels the animation on hover and focus so it settles as a pointer arrives,
+  and the demo does not use `float` on primary actions. The original site has
+  the same problem on its own `.cool-button`, left as-is in `public/`.
+- **A sparkle-emitter feedback loop** (fixed before the first commit): an
+  inline array default changed identity on every render, re-running the
+  scheduling effect and emitting more sparkles, which re-rendered. Found by
+  screenshotting the page, not by any unit test.

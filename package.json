@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "DDD Melbourne - 90s Geocities Style Edition",
   "main": "server.js",
-  "workspaces": ["packages/*"],
+  "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"

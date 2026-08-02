@@ -7,11 +7,15 @@ on:
     branches: ['**']
     paths:
       - 'packages/retro-ui/**'
+      - 'apps/quiz/**'
+      - 'scripts/**'
       - '.github/workflows/retro-ui.yml'
       - 'package.json'
   pull_request:
     paths:
       - 'packages/retro-ui/**'
+      - 'apps/quiz/**'
+      - 'scripts/**'
       - '.github/workflows/retro-ui.yml'
       - 'package.json'
 
@@ -39,6 +43,38 @@ jobs:
 
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/retro-ui
+
+      # The demo app is the review surface for the kit, so a change that breaks
+      # it should fail the PR rather than only being noticed at deploy time.
+      - name: Typecheck the quiz app
+        run: npm run typecheck --workspace apps/quiz
+
+      - name: Test the quiz app
+        run: npm run test --workspace apps/quiz
+
+      - name: Build the quiz app
+        run: npm run build --workspace apps/quiz
+
+      # Proves the retro export still produces a working site — and, critically,
+      # that `public/` was not modified to achieve it.
+      - name: Assemble the Pages artifact
+        run: |
+          rm -rf dist && mkdir -p dist
+          cp -r apps/quiz/dist/. dist/
+          node scripts/build-retro-site.mjs dist/retro
+          test -f dist/index.html
+          test -f dist/retro/index.html
+          test -f dist/retro/agenda.html
+          test -f dist/retro/styles.css
+
+      - name: Assert public/ was not modified
+        run: |
+          if [ -n "$(git status --porcelain public/ server.js)" ]; then
+            echo "::error::The retro export must treat public/ as read-only."
+            git status --porcelain public/ server.js
+            exit 1
+          fi
+          echo "public/ and server.js are untouched."
 
       # `npm publish --workspace` SKIPS a private package and still exits 0, so
       # a plain exit-code check would pass whether or not the guard held. Assert

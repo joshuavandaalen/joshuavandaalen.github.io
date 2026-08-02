@@ -35,6 +35,17 @@
     var(--retro-ease-in-out) infinite;
 }
 
+/* Settle the moment a user reaches for it.
+   A button that never stops moving is a moving target: harder to hit with a
+   mouse, materially harder with a motor impairment, and impossible for test
+   automation to click at all — which is how this was found. Cancelling the
+   animation rather than pausing it also lets the hover transform apply, since
+   a running animation would otherwise keep overriding it. */
+.retro-cool-button--float:hover,
+.retro-cool-button--float:focus-visible {
+  animation: none;
+}
+
 .retro-cool-button--sm {
   font-size: var(--retro-text-base);
   padding: 8px var(--retro-space-md);

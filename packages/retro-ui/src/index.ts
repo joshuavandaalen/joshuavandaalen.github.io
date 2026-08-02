@@ -161,6 +161,25 @@ export type {
   SessionVariant,
 } from './components/Schedule/Schedule';
 
+// --- Quiz primitives -------------------------------------------------------
+// Not extracted from the original site — it had no form controls at all. These
+// were added when the demo app proved the gap.
+export { AnswerList } from './components/AnswerList/AnswerList';
+export type {
+  AnswerListProps,
+  AnswerOptionProps,
+  AnswerState,
+} from './components/AnswerList/AnswerList';
+export { ProgressMeter } from './components/ProgressMeter/ProgressMeter';
+export type { ProgressMeterProps } from './components/ProgressMeter/ProgressMeter';
+export { FeedbackPanel } from './components/FeedbackPanel/FeedbackPanel';
+export type { FeedbackPanelProps } from './components/FeedbackPanel/FeedbackPanel';
+export { ScorePanel } from './components/ScorePanel/ScorePanel';
+export type {
+  ScorePanelProps,
+  ScoreCategory,
+} from './components/ScorePanel/ScorePanel';
+
 // --- Windows chrome --------------------------------------------------------
 export { Window95, Win95Button } from './components/Window95/Window95';
 export type { Window95Props, Win95ButtonProps } from './components/Window95/Window95';
