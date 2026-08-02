@@ -274,7 +274,12 @@
   font-weight: bold;
 }
 
+/* Both need an explicit `display`. These are `<span>`s: the outer bar happens
+   to be blockified because it is a grid item, but the fill inside it is not,
+   so it stayed `display: inline` and its width/height were ignored entirely —
+   a 0×0 box, and an always-empty bar. */
 .retro-score__bar {
+  display: block;
   width: 120px;
   height: 12px;
   background: var(--retro-chrome-face);
@@ -282,6 +287,7 @@
 }
 
 .retro-score__bar-fill {
+  display: block;
   height: 100%;
   background: var(--retro-gradient-grass);
 }
