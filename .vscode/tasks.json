@@ -195,6 +195,24 @@
     },
 
     {
+      "label": "✓ Verify the built site in a browser",
+      "detail": "Serves dist/ and drives all three sites through Chromium — the same 28 checks CI runs before it will deploy.",
+      "type": "shell",
+      "command": "node scripts/serve-static.mjs dist 4173 & SERVER=$!; sleep 2; npm run e2e -- http://localhost:4173; STATUS=$?; kill $SERVER; exit $STATUS",
+      "dependsOn": "📦 Assemble the Pages artifact",
+      "problemMatcher": [],
+      "presentation": { "group": "verify", "panel": "shared" }
+    },
+    {
+      "label": "🌐 Verify a live deployment",
+      "detail": "Smoke-tests a deployed URL — status and body content for every route.",
+      "type": "shell",
+      "command": "npm run verify:deployment -- ${input:deploymentUrl}",
+      "problemMatcher": [],
+      "presentation": { "group": "verify", "panel": "shared" }
+    },
+
+    {
       "label": "📦 Build everything",
       "detail": "Kit, then both apps, then Storybook.",
       "type": "shell",
@@ -245,6 +263,15 @@
       ],
       "dependsOrder": "parallel",
       "problemMatcher": []
+    }
+  ],
+
+  "inputs": [
+    {
+      "id": "deploymentUrl",
+      "type": "promptString",
+      "description": "Base URL of the deployment to verify",
+      "default": "https://joshuavandaalen.github.io"
     }
   ]
 }
