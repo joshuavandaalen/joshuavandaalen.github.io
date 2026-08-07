@@ -5,8 +5,10 @@ name: CI
 # same build and the same browser suite that guards production.
 
 on:
+  # Only main on push. A branch with an open PR is covered by `pull_request`,
+  # and triggering on both ran every commit twice.
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
 
 permissions:
@@ -34,8 +36,16 @@ jobs:
 
       - run: npm ci
 
-      - name: Typecheck
-        run: npm run typecheck
+      # The kit is typechecked and built first on purpose: the apps import it
+      # by package name and resolve its types from dist/index.d.ts, which does
+      # not exist on a clean checkout. Typechecking the apps against the built
+      # declarations rather than the kit's source is deliberate — it verifies
+      # the package's public types actually work for a consumer.
+      - name: Typecheck and build the UI kit
+        run: npm run build:kit
+
+      - name: Typecheck the apps
+        run: npm run typecheck:apps
 
       - name: Unit tests
         run: npm test
@@ -45,8 +55,8 @@ jobs:
       - name: API reference is not stale
         run: npm run api:check
 
-      - name: Build everything
-        run: npm run build:all
+      - name: Build the apps
+        run: npm run build:docs && npm run build:quiz
 
       - name: Build Storybook
         run: npm run build:storybook
@@ -106,6 +116,7 @@ jobs:
 
           npm run e2e -- http://localhost:4173
 
+      # Lets a reviewer download and open the exact build that was verified.
       - name: Upload the artifact for inspection
         if: always()
         uses: actions/upload-artifact@v4
@@ -113,3 +124,6 @@ jobs:
           name: site-${{ github.sha }}
           path: dist
           retention-days: 7
+          # An earlier step failing means there is no dist; that is already
+          # reported, so do not add a second confusing warning.
+          if-no-files-found: ignore
