@@ -44,28 +44,31 @@ jobs:
       - name: Build Storybook
         run: npm run build-storybook --workspace packages/retro-ui
 
+      # The generated props tables must match the source they came from. This
+      # is what makes documentation drift impossible rather than merely
+      # discouraged.
+      - name: Check the API reference is not stale
+        run: node scripts/extract-api.mjs --check
+
       # The demo app is the review surface for the kit, so a change that breaks
       # it should fail the PR rather than only being noticed at deploy time.
-      - name: Typecheck the quiz app
-        run: npm run typecheck --workspace apps/quiz
+      - name: Typecheck the apps
+        run: |
+          npm run typecheck --workspace apps/quiz
+          npm run typecheck --workspace apps/docs
 
       - name: Test the quiz app
         run: npm run test --workspace apps/quiz
 
-      - name: Build the quiz app
-        run: npm run build --workspace apps/quiz
-
-      # Proves the retro export still produces a working site — and, critically,
-      # that `public/` was not modified to achieve it.
-      - name: Assemble the Pages artifact
+      - name: Build the apps
         run: |
-          rm -rf dist && mkdir -p dist
-          cp -r apps/quiz/dist/. dist/
-          node scripts/build-retro-site.mjs dist/retro
-          test -f dist/index.html
-          test -f dist/retro/index.html
-          test -f dist/retro/agenda.html
-          test -f dist/retro/styles.css
+          npm run build --workspace apps/quiz
+          npm run build --workspace apps/docs
+
+      # Proves the whole artifact still assembles — and, critically, that
+      # `public/` was not modified to achieve it.
+      - name: Assemble the Pages artifact
+        run: node scripts/build-pages.mjs --skip-storybook
 
       - name: Assert public/ was not modified
         run: |

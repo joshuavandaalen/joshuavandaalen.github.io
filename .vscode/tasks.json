@@ -1,0 +1,250 @@
+{
+  "version": "2.0.0",
+  "// ": [
+    "Every runnable site and check in this repository, in one place.",
+    "Run with: Terminal → Run Task…, or ⇧⌘P → 'Tasks: Run Task'.",
+    "",
+    "Ports:  docs 5174 · quiz 5173 · storybook 6006 · 90s site 3001 · preview 4173",
+    "",
+    "Background matchers are defined inline rather than referencing $vite-dev",
+    "or similar, because those come from extensions — a task referencing a",
+    "matcher the user has not installed fails with a dialog."
+  ],
+  "tasks": [
+    {
+      "label": "▶ Docs site (5174)",
+      "detail": "The public component-library documentation site.",
+      "type": "shell",
+      "command": "npm run dev --workspace apps/docs",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "fileLocation": ["relative", "${workspaceFolder}/apps/docs"],
+        "pattern": {
+          "regexp": "^\\s*(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "(VITE v|restarting)",
+          "endsPattern": "(ready in|Local:)"
+        }
+      },
+      "presentation": {
+        "group": "sites",
+        "panel": "dedicated",
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "▶ Quiz demo app (5173)",
+      "detail": "DevOps Dojo — the Azure/Kubernetes interview trainer built on the kit.",
+      "type": "shell",
+      "command": "npm run dev --workspace apps/quiz",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "fileLocation": ["relative", "${workspaceFolder}/apps/quiz"],
+        "pattern": {
+          "regexp": "^\\s*(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "(VITE v|restarting)",
+          "endsPattern": "(ready in|Local:)"
+        }
+      },
+      "presentation": {
+        "group": "sites",
+        "panel": "dedicated",
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "▶ Storybook (6006)",
+      "detail": "Component workbench — includes the fixed-position widgets the docs site cannot frame.",
+      "type": "shell",
+      "command": "npm run storybook --workspace packages/retro-ui",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "storybook",
+        "fileLocation": ["relative", "${workspaceFolder}/packages/retro-ui"],
+        "pattern": {
+          "regexp": "^\\s*(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "(Starting|storybook)",
+          "endsPattern": "(Storybook.*started|Local:)"
+        }
+      },
+      "presentation": {
+        "group": "sites",
+        "panel": "dedicated",
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "▶ The 1997 site, Express (3001)",
+      "detail": "The original DDD Melbourne 90s site, served exactly as it was written.",
+      "type": "shell",
+      "command": "npm start",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "node",
+        "pattern": {
+          "regexp": "^\\s*(Error): (.*)$",
+          "severity": 1,
+          "message": 2
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "node server.js",
+          "endsPattern": "Server running on"
+        }
+      },
+      "presentation": {
+        "group": "sites",
+        "panel": "dedicated",
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "▶ UI kit — watch build",
+      "detail": "Rebuilds packages/retro-ui on change so the apps pick it up live.",
+      "type": "shell",
+      "command": "npm run dev --workspace packages/retro-ui",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "fileLocation": ["relative", "${workspaceFolder}/packages/retro-ui"],
+        "pattern": {
+          "regexp": "^\\s*(.*):(\\d+):(\\d+):\\s+(error|warning):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "build started",
+          "endsPattern": "built in"
+        }
+      },
+      "presentation": {
+        "group": "sites",
+        "panel": "dedicated",
+        "reveal": "silent"
+      }
+    },
+
+    {
+      "label": "✓ Typecheck everything",
+      "type": "shell",
+      "command": "npm run typecheck --workspace packages/retro-ui && npm run typecheck --workspace apps/quiz && npm run typecheck --workspace apps/docs",
+      "group": "test",
+      "problemMatcher": ["$tsc"],
+      "presentation": { "group": "verify", "panel": "shared" }
+    },
+    {
+      "label": "✓ Test the UI kit",
+      "type": "shell",
+      "command": "npm run test --workspace packages/retro-ui",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": [],
+      "presentation": { "group": "verify", "panel": "shared" }
+    },
+    {
+      "label": "✓ Test the quiz app",
+      "type": "shell",
+      "command": "npm run test --workspace apps/quiz",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": { "group": "verify", "panel": "shared" }
+    },
+    {
+      "label": "✓ Check the API docs are not stale",
+      "detail": "Regenerates the props tables from source and fails if they differ.",
+      "type": "shell",
+      "command": "node scripts/extract-api.mjs --check",
+      "problemMatcher": [],
+      "presentation": { "group": "verify", "panel": "shared" }
+    },
+    {
+      "label": "↻ Regenerate the API docs",
+      "detail": "Re-reads the kit's TypeScript interfaces into apps/docs/src/generated/api.json.",
+      "type": "shell",
+      "command": "node scripts/extract-api.mjs",
+      "problemMatcher": [],
+      "presentation": { "group": "verify", "panel": "shared" }
+    },
+
+    {
+      "label": "📦 Build everything",
+      "detail": "Kit, then both apps, then Storybook.",
+      "type": "shell",
+      "command": "npm run build --workspace packages/retro-ui && npm run build --workspace apps/docs && npm run build --workspace apps/quiz && npm run build-storybook --workspace packages/retro-ui",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$tsc"],
+      "presentation": { "group": "build", "panel": "shared" }
+    },
+    {
+      "label": "📦 Assemble the Pages artifact",
+      "detail": "Builds and stitches all four sites into dist/ exactly as CI does.",
+      "type": "shell",
+      "command": "node scripts/build-pages.mjs",
+      "dependsOn": "📦 Build everything",
+      "group": "build",
+      "problemMatcher": [],
+      "presentation": { "group": "build", "panel": "shared" }
+    },
+    {
+      "label": "🌐 Preview the whole site (4173)",
+      "detail": "Serves dist/ on one port so the links between the four sites actually resolve.",
+      "type": "shell",
+      "command": "node scripts/build-pages.mjs --skip-storybook && npx --yes serve dist -l 4173",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "serve",
+        "pattern": { "regexp": "^\\s*(Error): (.*)$", "severity": 1, "message": 2 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Pages artifact",
+          "endsPattern": "(Accepting connections|Local:)"
+        }
+      },
+      "presentation": {
+        "group": "build",
+        "panel": "dedicated",
+        "reveal": "always"
+      }
+    },
+
+    {
+      "label": "🚀 Everything (docs + storybook + kit watch)",
+      "detail": "The usual working set for developing components.",
+      "dependsOn": [
+        "▶ UI kit — watch build",
+        "▶ Docs site (5174)",
+        "▶ Storybook (6006)"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}

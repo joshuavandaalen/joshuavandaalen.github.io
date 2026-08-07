@@ -3,10 +3,8 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
-  // `joshuavandaalen.github.io` is a user Pages site, served from the domain
-  // root — so no base path. The 90s site is copied alongside at /retro at
-  // deploy time.
-  base: '/',
+  // The docs site owns the domain root; the demo is published one level down.
+  base: '/quiz/',
   build: {
     outDir: 'dist',
     emptyOutDir: true,

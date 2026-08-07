@@ -80,7 +80,7 @@ export function App() {
 
           <FooterLinks
             links={[
-              { label: '🏠 QUIZ', href: '/' },
+              { label: '📚 DOCS', href: '/' },
               { label: '🕹️ THE 90s SITE', href: '/retro/' },
               {
                 label: '☁️ AZURE DOCS',

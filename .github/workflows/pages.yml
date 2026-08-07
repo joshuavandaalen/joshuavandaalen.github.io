@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
-# Publishes the development website:
-#   /       the DevOps Dojo quiz (the demo app for the retro-ui kit)
-#   /retro  the original DDD Melbourne 90s site, preserved
+# Publishes every site in the repository:
+#   /           the component-library documentation site
+#   /quiz/      the DevOps Dojo demo app
+#   /retro/     the original DDD Melbourne 90s site, preserved
+#   /storybook/ the component workbench
 #
 # NOTE: this requires Settings → Pages → Source = "GitHub Actions".
 # A workflow cannot set that itself; deployment fails until it is set.
@@ -37,20 +39,19 @@ jobs:
       - name: Build the UI kit
         run: npm run build --workspace packages/retro-ui
 
+      - name: Build the documentation site
+        run: npm run build --workspace apps/docs
+
       - name: Build the quiz app
         run: npm run build --workspace apps/quiz
 
-      - name: Assemble the site
-        run: |
-          rm -rf dist
-          mkdir -p dist
-          cp -r apps/quiz/dist/. dist/
-          node scripts/build-retro-site.mjs dist/retro
+      - name: Build Storybook
+        run: npm run build-storybook --workspace packages/retro-ui
 
-      # Pages would otherwise run the output through Jekyll, which ignores
-      # files and directories beginning with an underscore.
-      - name: Disable Jekyll processing
-        run: touch dist/.nojekyll
+      # Stitches all four sites together, writes the SPA fallback and the
+      # .nojekyll marker, and fails if any expected file is missing.
+      - name: Assemble the site
+        run: node scripts/build-pages.mjs
 
       - uses: actions/configure-pages@v5
 
