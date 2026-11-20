@@ -1,0 +1,129 @@
+name: CI
+
+# Verification for every push and pull request. Nothing here deploys — but a
+# change that fails here must never reach the deploy workflow, so this runs the
+# same build and the same browser suite that guards production.
+
+on:
+  # Only main on push. A branch with an open PR is covered by `pull_request`,
+  # and triggering on both ran every commit twice.
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# One run per ref. Superseded runs are cancelled: a commit that has already
+# been replaced is not worth the minutes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build, test and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # The kit is typechecked and built first on purpose: the apps import it
+      # by package name and resolve its types from dist/index.d.ts, which does
+      # not exist on a clean checkout. Typechecking the apps against the built
+      # declarations rather than the kit's source is deliberate — it verifies
+      # the package's public types actually work for a consumer.
+      - name: Typecheck and build the UI kit
+        run: npm run build:kit
+
+      - name: Typecheck the apps
+        run: npm run typecheck:apps
+
+      - name: Unit tests
+        run: npm test
+
+      # The props tables are generated from the kit's TypeScript. If the source
+      # changed without regenerating, the published docs would be wrong.
+      - name: API reference is not stale
+        run: npm run api:check
+
+      - name: Build the apps
+        run: npm run build:docs && npm run build:quiz
+
+      - name: Build Storybook
+        run: npm run build:storybook
+
+      - name: Assemble the Pages artifact
+        run: node scripts/build-pages.mjs
+
+      # `public/` is the historical original and a read-only input to the
+      # build. If a change to the retro export ever writes to it, fail here.
+      - name: The original site was not modified
+        run: |
+          if [ -n "$(git status --porcelain public/ server.js visitors.txt)" ]; then
+            echo "::error::The build modified public/, server.js or visitors.txt. They are read-only inputs."
+            git status --porcelain public/ server.js visitors.txt
+            git diff -- public/ server.js visitors.txt | head -50
+            exit 1
+          fi
+          echo "public/, server.js and visitors.txt are untouched."
+
+      - name: The package cannot be published
+        run: |
+          node -e "
+            const pkg = require('./packages/retro-ui/package.json');
+            if (pkg.private !== true) {
+              console.error('::error::retro-ui must stay private until a package name is chosen for release.');
+              process.exit(1);
+            }
+            console.log('package.json private: true');
+          "
+          # `npm publish --workspace` SKIPS a private package and still exits 0,
+          # so an exit-code check would pass whether or not the guard held.
+          npm publish --dry-run --workspace packages/retro-ui 2>&1 | tee /tmp/publish.log
+          if ! grep -q 'marked as private' /tmp/publish.log; then
+            echo "::error::npm did not report the package as private — it may be publishable."
+            exit 1
+          fi
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      # The artifact is served exactly as Pages would serve it — directory
+      # indexes and the 404.html fallback — then driven through a real browser.
+      - name: Verify the built artifact in a browser
+        run: |
+          npm run serve:dist &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+
+          for i in $(seq 1 30); do
+            if curl -sf -o /dev/null http://localhost:4173/; then break; fi
+            if [ "$i" = "30" ]; then
+              echo "::error::Static server never came up on :4173"
+              exit 1
+            fi
+            sleep 1
+          done
+
+          npm run e2e -- http://localhost:4173
+
+      # Lets a reviewer download and open the exact build that was verified.
+      - name: Upload the artifact for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-${{ github.sha }}
+          path: dist
+          retention-days: 7
+          # An earlier step failing means there is no dist; that is already
+          # reported, so do not add a second confusing warning.
+          if-no-files-found: ignore

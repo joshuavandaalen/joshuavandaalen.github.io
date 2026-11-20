@@ -1,0 +1,126 @@
+/* === GLOWING TITLE ======================================================= */
+
+.retro-glowing-title {
+  font-size: var(--retro-text-5xl);
+  color: var(--retro-yellow);
+  text-shadow: var(--retro-text-glow);
+  margin: var(--retro-space-lg) 0;
+  font-weight: bold;
+  letter-spacing: var(--retro-tracking-wide);
+}
+
+.retro-glowing-title--pulse {
+  animation: retro-glow-pulse var(--retro-duration-slow) var(--retro-ease-in-out)
+    infinite;
+}
+
+/* === SECTION TITLE ======================================================= */
+
+.retro-section-title {
+  font-size: var(--retro-text-4xl);
+  color: var(--retro-magenta);
+  text-align: center;
+  margin-bottom: var(--retro-space-lg);
+  text-shadow: var(--retro-text-offset);
+  font-weight: bold;
+}
+
+/* === BLINK ===============================================================
+   The un-animated resting state is deliberately `opacity: 1`. When the
+   reduced-motion policy strips the animation, the text must stay readable —
+   the original's keyframes would have left it stuck invisible. */
+
+.retro-blink {
+  opacity: 1;
+  animation: retro-blink var(--retro-blink-speed, 1s) var(--retro-ease-blink)
+    infinite;
+}
+
+/* === RAINBOW TEXT ======================================================== */
+
+.retro-rainbow-text {
+  display: inline-block;
+}
+
+.retro-rainbow-text__char {
+  display: inline-block;
+  color: var(--retro-char-color);
+  animation: retro-rainbow-wave var(--retro-duration-slow) var(--retro-ease-in-out)
+    infinite;
+  animation-delay: var(--retro-char-delay, 0s);
+}
+
+/* Preserve runs of spaces the way the browser would inside normal text. */
+.retro-rainbow-text__char--space {
+  white-space: pre;
+}
+
+/* === HIGHLIGHT =========================================================== */
+
+.retro-highlight {
+  background: var(--retro-yellow);
+  color: var(--retro-red);
+  padding: var(--retro-space-2xs) var(--retro-space-xs);
+  font-weight: bold;
+  border: var(--retro-bevel-width-thin) solid var(--retro-red);
+}
+
+/* === LINK ================================================================ */
+
+.retro-link {
+  color: var(--retro-link);
+  text-decoration: underline;
+  font-weight: bold;
+  transition: all var(--retro-duration-fast);
+}
+
+.retro-link:visited {
+  color: var(--retro-link-visited);
+}
+
+.retro-link:hover,
+.retro-link:focus-visible {
+  color: var(--retro-link-hover);
+  background: var(--retro-link-hover-bg);
+  padding: var(--retro-space-2xs) var(--retro-space-xs);
+}
+
+/* === TEXT PANELS ========================================================= */
+
+.retro-text-panel {
+  background: var(--retro-panel-bg);
+  color: var(--retro-panel-ink);
+  padding: var(--retro-space-lg);
+  border-radius: var(--retro-radius-lg);
+  margin: var(--retro-space-lg) 0;
+}
+
+.retro-text-panel--intro {
+  font-size: var(--retro-text-lg);
+  line-height: var(--retro-leading-loose);
+  border: var(--retro-bevel-width-sm) solid var(--retro-magenta);
+}
+
+.retro-text-panel--fun {
+  font-size: var(--retro-text-md);
+  padding: var(--retro-space-md);
+  border: var(--retro-bevel-dashed-magenta);
+}
+
+.retro-text-panel--note {
+  font-style: italic;
+  text-align: center;
+  padding: var(--retro-space-sm);
+  border-radius: var(--retro-radius-md);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .retro-glowing-title {
+    font-size: var(--retro-text-4xl);
+  }
+
+  .retro-section-title {
+    font-size: var(--retro-text-2xl);
+  }
+}

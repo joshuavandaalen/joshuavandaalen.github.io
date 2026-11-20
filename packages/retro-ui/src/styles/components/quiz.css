@@ -1,0 +1,314 @@
+/* ============================================================================
+   QUIZ PRIMITIVES
+   ----------------------------------------------------------------------------
+   The one group here that was not extracted from the original site. The 90s
+   page had no form controls at all, which only became obvious when a demo app
+   tried to use the kit — so these are built from the same tokens rather than
+   from new values, to keep them in the same visual system.
+   ========================================================================= */
+
+/* === ANSWER LIST =========================================================
+   A native radiogroup. The input stays in the DOM (visually hidden, never
+   `display: none`) so arrow-key navigation, focus and screen-reader semantics
+   all come from the platform instead of being reimplemented on divs. */
+
+.retro-answers {
+  display: grid;
+  gap: var(--retro-space-sm);
+  margin: var(--retro-space-lg) 0;
+  border: 0;
+  padding: 0;
+}
+
+.retro-answers__legend {
+  font-size: var(--retro-text-lg);
+  font-weight: bold;
+  color: var(--retro-panel-ink);
+  margin-bottom: var(--retro-space-sm);
+  padding: 0;
+}
+
+.retro-answer {
+  position: relative;
+}
+
+.retro-answer__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.retro-answer__label {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-sm);
+  background: rgba(255, 255, 255, 0.95);
+  border: var(--retro-bevel-outset-gold);
+  padding: var(--retro-space-sm) var(--retro-space-md);
+  font-family: var(--retro-font-display);
+  font-size: var(--retro-text-md);
+  color: var(--retro-navy);
+  cursor: pointer;
+  transition: all var(--retro-duration-fast);
+}
+
+.retro-answer__label:hover {
+  background: #fffde7;
+  transform: translateX(4px);
+}
+
+/* Focus lives on the hidden input, so the ring has to be drawn on the label. */
+.retro-answer__input:focus-visible + .retro-answer__label {
+  outline: 3px solid var(--retro-cyan);
+  outline-offset: 2px;
+}
+
+.retro-answer__input:checked + .retro-answer__label {
+  border-style: inset;
+  background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+  font-weight: bold;
+}
+
+.retro-answer__input:disabled + .retro-answer__label {
+  cursor: default;
+  transform: none;
+}
+
+.retro-answer__key {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  background: var(--retro-gradient-royal);
+  color: var(--retro-white);
+  border: var(--retro-bevel-width-thin) outset var(--retro-gold);
+  font-family: var(--retro-font-mono);
+  font-weight: bold;
+  font-size: var(--retro-text-base);
+}
+
+.retro-answer__text {
+  flex: 1;
+}
+
+/* The verdict glyph. Correctness is carried by this mark and by the visually
+   hidden text beside it, never by colour alone. */
+.retro-answer__mark {
+  flex-shrink: 0;
+  font-size: var(--retro-text-xl);
+  line-height: 1;
+}
+
+.retro-answer--correct .retro-answer__label {
+  background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+  border-color: #2e7d32;
+  border-style: solid;
+  color: #1b5e20;
+  font-weight: bold;
+}
+
+.retro-answer--incorrect .retro-answer__label {
+  background: linear-gradient(135deg, #ffcdd2 0%, #ef9a9a 100%);
+  border-color: #c62828;
+  border-style: solid;
+  color: #b71c1c;
+  font-weight: bold;
+}
+
+/* The right answer, surfaced after the reader picked a different one. */
+.retro-answer--revealed .retro-answer__label {
+  background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+  border-color: #2e7d32;
+  border-style: dashed;
+  color: #1b5e20;
+}
+
+.retro-answer--muted .retro-answer__label {
+  opacity: 0.65;
+}
+
+/* === PROGRESS METER ======================================================
+   The segmented block bar of a 90s file-copy dialog. */
+
+.retro-progress {
+  margin: var(--retro-space-md) 0;
+}
+
+.retro-progress__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--retro-font-system);
+  font-size: var(--retro-text-xs);
+  font-weight: bold;
+  color: var(--retro-white);
+  text-shadow: 1px 1px 2px var(--retro-black);
+  margin-bottom: var(--retro-space-2xs);
+}
+
+.retro-progress__track {
+  height: 24px;
+  background: var(--retro-chrome-face);
+  border: var(--retro-bevel-width-thin) inset var(--retro-chrome-highlight);
+  padding: 3px;
+  display: flex;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.retro-progress__block {
+  flex: 0 0 14px;
+  background: var(--retro-navy);
+}
+
+.retro-progress__block--empty {
+  background: transparent;
+}
+
+/* === FEEDBACK PANEL ====================================================== */
+
+.retro-feedback {
+  border: var(--retro-bevel-width-md) ridge var(--retro-gold);
+  padding: var(--retro-space-md);
+  margin: var(--retro-space-md) 0;
+  background: var(--retro-panel-bg);
+  color: var(--retro-panel-ink);
+}
+
+.retro-feedback--correct {
+  border-color: #4caf50;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+.retro-feedback--incorrect {
+  border-color: #f44336;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+}
+
+.retro-feedback__verdict {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-sm);
+  font-size: var(--retro-text-xl);
+  font-weight: bold;
+  margin-bottom: var(--retro-space-sm);
+}
+
+.retro-feedback--correct .retro-feedback__verdict {
+  color: #1b5e20;
+}
+
+.retro-feedback--incorrect .retro-feedback__verdict {
+  color: #b71c1c;
+}
+
+.retro-feedback__explanation {
+  font-size: var(--retro-text-md);
+  line-height: var(--retro-leading-loose);
+  color: var(--retro-navy);
+}
+
+.retro-feedback__reference {
+  margin-top: var(--retro-space-sm);
+  font-size: var(--retro-text-base);
+}
+
+/* === SCORE PANEL ========================================================= */
+
+.retro-score {
+  text-align: center;
+  padding: var(--retro-space-lg);
+}
+
+.retro-score__headline {
+  font-family: var(--retro-font-impact);
+  font-size: var(--retro-text-6xl);
+  color: var(--retro-yellow);
+  text-shadow: var(--retro-text-glow);
+  line-height: 1;
+  margin: var(--retro-space-sm) 0;
+}
+
+.retro-score__outof {
+  font-size: var(--retro-text-xl);
+  color: var(--retro-white);
+  text-shadow: var(--retro-shadow-hard);
+}
+
+.retro-score__grade {
+  font-size: var(--retro-text-2xl);
+  font-weight: bold;
+  margin: var(--retro-space-md) 0;
+}
+
+.retro-score__breakdown {
+  display: grid;
+  gap: var(--retro-space-xs);
+  margin: var(--retro-space-lg) auto 0;
+  max-width: 520px;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+}
+
+.retro-score__row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--retro-space-sm);
+  background: rgba(255, 255, 255, 0.9);
+  border: var(--retro-bevel-width-thin) outset var(--retro-gold);
+  padding: var(--retro-space-xs) var(--retro-space-sm);
+  font-size: var(--retro-text-base);
+  color: var(--retro-navy);
+}
+
+.retro-score__category {
+  font-weight: bold;
+}
+
+/* Both need an explicit `display`. These are `<span>`s: the outer bar happens
+   to be blockified because it is a grid item, but the fill inside it is not,
+   so it stayed `display: inline` and its width/height were ignored entirely —
+   a 0×0 box, and an always-empty bar. */
+.retro-score__bar {
+  display: block;
+  width: 120px;
+  height: 12px;
+  background: var(--retro-chrome-face);
+  border: 1px inset var(--retro-chrome-shadow);
+}
+
+.retro-score__bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--retro-gradient-grass);
+}
+
+.retro-score__tally {
+  font-family: var(--retro-font-mono);
+  font-weight: bold;
+  min-width: 48px;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .retro-score__headline {
+    font-size: var(--retro-text-4xl);
+  }
+
+  .retro-score__row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .retro-score__bar {
+    display: none;
+  }
+}

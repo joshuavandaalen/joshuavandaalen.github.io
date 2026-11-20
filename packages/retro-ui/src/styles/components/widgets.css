@@ -1,0 +1,194 @@
+/* === MIDI PLAYER ========================================================= */
+
+.retro-midi-player {
+  position: fixed;
+  bottom: var(--retro-space-lg);
+  right: var(--retro-space-lg);
+  z-index: var(--retro-z-widget);
+  background: var(--retro-gradient-chrome);
+  border: var(--retro-bevel-width-sm) ridge var(--retro-chrome-highlight);
+  padding: var(--retro-space-sm);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.retro-midi-player--static {
+  position: static;
+  display: inline-block;
+}
+
+.retro-midi-player__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-sm);
+}
+
+.retro-midi-player__note {
+  font-size: var(--retro-text-2xl);
+}
+
+.retro-midi-player__meta {
+  font-family: var(--retro-font-system);
+  font-size: var(--retro-text-xs);
+  color: var(--retro-black);
+}
+
+.retro-midi-player__label {
+  font-weight: bold;
+}
+
+/* === DARK MODE TOGGLE ==================================================== */
+
+.retro-darkmode-toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: var(--retro-z-widget);
+  background: var(--retro-chrome-face);
+  border: var(--retro-bevel-chrome-raised);
+  padding: 4px 8px;
+  font-family: var(--retro-font-system);
+  box-shadow: 2px 2px 0 var(--retro-black);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.retro-darkmode-toggle--static {
+  position: static;
+  display: inline-flex;
+}
+
+.retro-darkmode-toggle__label {
+  font-size: var(--retro-text-2xs);
+  font-weight: bold;
+  color: var(--retro-black);
+}
+
+/* === SPARKLES ============================================================ */
+
+.retro-sparkle-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--retro-z-cursor);
+  overflow: hidden;
+}
+
+.retro-sparkle {
+  position: absolute;
+  pointer-events: none;
+  animation: retro-sparkle-fade var(--retro-duration-slow) var(--retro-ease-out)
+    forwards;
+}
+
+/* === ADWARE ==============================================================
+   Note the `pointer-events` split: the overlay dims the page and catches
+   click-outside, but the modal itself stays interactive. */
+
+.retro-adware-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--retro-z-modal);
+  animation: retro-fade-in 0.15s var(--retro-ease-out);
+}
+
+.retro-adware-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: var(--retro-modal-transform, translate(-50%, -50%));
+  width: 420px;
+  max-width: 92vw;
+  border: var(--retro-bevel-chrome-window);
+  box-shadow: var(--retro-shadow-window);
+  font-family: var(--retro-font-system);
+  animation: retro-bounce-in var(--retro-duration-fast) var(--retro-ease-bounce);
+}
+
+.retro-adware-modal__content {
+  padding: var(--retro-space-lg);
+  text-align: center;
+  color: var(--retro-white);
+  border: var(--retro-bevel-width-thin) inset var(--retro-chrome-shadow);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  background: var(--retro-ad-bg, var(--retro-gradient-fire));
+}
+
+.retro-adware-modal__title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-family: var(--retro-font-impact);
+  animation: retro-ad-pulse var(--retro-duration-quick) var(--retro-ease-in-out)
+    infinite alternate;
+  letter-spacing: 1px;
+}
+
+.retro-adware-modal__body {
+  font-size: var(--retro-text-md);
+  line-height: var(--retro-leading-loose);
+  margin-bottom: var(--retro-space-md);
+  font-family: var(--retro-font-display);
+}
+
+.retro-adware-modal__cta {
+  display: inline-block;
+  padding: var(--retro-space-sm) var(--retro-space-xl);
+  background: linear-gradient(180deg, var(--retro-yellow), #ffcc00);
+  color: #cc0000;
+  font-size: var(--retro-text-lg);
+  font-weight: bold;
+  font-family: var(--retro-font-impact);
+  border: var(--retro-bevel-width-sm) outset #ffdd00;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: retro-cta-throb 0.6s var(--retro-ease-in-out) infinite alternate;
+}
+
+.retro-adware-modal__cta:hover {
+  background: linear-gradient(180deg, #ff6600, #ff3300);
+  color: var(--retro-white);
+}
+
+.retro-adware-modal__cta:active {
+  border-style: inset;
+}
+
+.retro-adware-modal__small {
+  margin-top: 12px;
+  font-size: var(--retro-text-3xs);
+  opacity: 0.6;
+  font-family: var(--retro-font-serif);
+  font-style: italic;
+}
+
+/* === WEBMASTER PANEL ===================================================== */
+
+.retro-webmaster {
+  text-align: center;
+  padding: var(--retro-space-lg);
+}
+
+.retro-webmaster__name {
+  font-size: var(--retro-text-3xl);
+  color: var(--retro-magenta);
+  font-weight: bold;
+  margin: 0;
+}
+
+.retro-webmaster__titles {
+  font-size: var(--retro-text-lg);
+  color: var(--retro-link);
+  margin: var(--retro-space-md) 0;
+}
+
+.retro-webmaster__contact {
+  font-size: var(--retro-text-md);
+}
+
+.retro-webmaster__colophon {
+  font-size: var(--retro-text-base);
+  margin-top: var(--retro-space-sm);
+}

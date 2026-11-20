@@ -1,0 +1,60 @@
+/* === MARQUEE =============================================================
+   A faithful replacement for the deprecated `<marquee>` element. The original
+   site used thirty of them; the element is removed from the HTML spec and
+   browsers may drop it at any time, so this reimplements the two behaviours
+   people actually used — `scroll` and `alternate` — on top of transforms.
+
+   Distances are measured at runtime and fed in as custom properties, which is
+   what makes this reflow correctly on resize (the real element never did). */
+
+.retro-marquee {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+}
+
+.retro-marquee__track {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation-name: var(--retro-marquee-name, retro-marquee-scroll);
+  animation-duration: var(--retro-marquee-duration, 10s);
+  animation-timing-function: var(--retro-ease-linear);
+  animation-iteration-count: var(--retro-marquee-iterations, infinite);
+  animation-fill-mode: both;
+}
+
+.retro-marquee--alternate .retro-marquee__track {
+  animation-direction: alternate;
+  animation-timing-function: var(--retro-ease-in-out);
+}
+
+.retro-marquee--paused .retro-marquee__track,
+.retro-marquee--pause-on-hover:hover .retro-marquee__track,
+.retro-marquee--pause-on-hover:focus-within .retro-marquee__track {
+  animation-play-state: paused;
+}
+
+/* With motion suppressed the content must still be fully readable, so the
+   track stops sliding and wraps instead of overflowing off-screen. */
+.retro-marquee--static {
+  overflow: visible;
+  white-space: normal;
+}
+
+.retro-marquee--static .retro-marquee__track {
+  animation: none;
+  transform: none;
+  white-space: normal;
+  display: block;
+}
+
+/* Held between mount and the first measurement. Distinct from `--static`
+   because it must NOT change `white-space`: measuring a wrapped track would
+   report the container's width rather than the content's natural width, and
+   the marquee would size itself from a number that was never true. */
+.retro-marquee--measuring .retro-marquee__track {
+  animation: none;
+}

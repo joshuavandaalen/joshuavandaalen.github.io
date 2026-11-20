@@ -1,0 +1,299 @@
+/* ============================================================================
+   RETRO UI — DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   Every value here was measured off the original DDD Melbourne 90s site rather
+   than invented, so the kit reproduces that look exactly. Tokens are plain CSS
+   custom properties, which means the raw-CSS consumer path gets the identical
+   system without loading a single byte of JavaScript.
+   ========================================================================= */
+
+:root {
+  /* --------------------------------------------------------------------
+     CORE PALETTE
+     The unapologetically saturated web-safe colours the era was built on.
+     -------------------------------------------------------------------- */
+  --retro-navy: #000080;
+  --retro-yellow: #ffff00;
+  --retro-magenta: #ff00ff;
+  --retro-cyan: #00ffff;
+  --retro-lime: #00ff00;
+  --retro-red: #ff0000;
+  --retro-orange: #ff7f00;
+  --retro-white: #ffffff;
+  --retro-black: #000000;
+
+  --retro-gold: #ffd700;
+  --retro-silver: #c0c0c0;
+
+  /* Link states, straight out of the default Netscape stylesheet. */
+  --retro-link: #0000ff;
+  --retro-link-visited: #800080;
+  --retro-link-hover: var(--retro-magenta);
+  --retro-link-hover-bg: var(--retro-yellow);
+
+  /* --------------------------------------------------------------------
+     THE RAINBOW
+     Seven stops, used for the divider bars, banner sweeps, content-box halo
+     and cursor trail. Defined once because the original repeated it four
+     times and they had already drifted apart.
+     -------------------------------------------------------------------- */
+  --retro-rainbow-1: #ff0000;
+  --retro-rainbow-2: #ff7f00;
+  --retro-rainbow-3: #ffff00;
+  --retro-rainbow-4: #00ff00;
+  --retro-rainbow-5: #0000ff;
+  --retro-rainbow-6: #4b0082;
+  --retro-rainbow-7: #9400d3;
+
+  --retro-rainbow-stops: var(--retro-rainbow-1), var(--retro-rainbow-2),
+    var(--retro-rainbow-3), var(--retro-rainbow-4), var(--retro-rainbow-5),
+    var(--retro-rainbow-6), var(--retro-rainbow-7);
+
+  --retro-gradient-rainbow: linear-gradient(90deg, var(--retro-rainbow-stops));
+  --retro-gradient-rainbow-diagonal: linear-gradient(45deg, var(--retro-rainbow-stops));
+
+  /* --------------------------------------------------------------------
+     SIGNATURE GRADIENTS
+     Each pair had exactly one job on the original site; the names describe
+     that job rather than the hex values.
+     -------------------------------------------------------------------- */
+  --retro-gradient-royal: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* header + footer */
+  --retro-gradient-sky: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); /* content box */
+  --retro-gradient-sunset: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); /* highlight box */
+  --retro-gradient-fire: linear-gradient(135deg, #ff0000, #ff7f00); /* primary button */
+  --retro-gradient-fire-hot: linear-gradient(135deg, #ff7f00, #ffff00); /* button hover */
+  --retro-gradient-grass: linear-gradient(135deg, #4caf50 0%, #45a049 100%); /* nav button */
+  --retro-gradient-amber: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); /* nav active */
+  --retro-gradient-flash: linear-gradient(135deg, #ff0080 0%, #7928ca 50%, #ff0080 100%);
+  --retro-gradient-chrome: linear-gradient(135deg, #c0c0c0, #808080); /* MIDI player */
+
+  /* --------------------------------------------------------------------
+     SPONSOR TIER PALETTES
+     -------------------------------------------------------------------- */
+  --retro-tier-diamond-from: #b9f2ff;
+  --retro-tier-diamond-to: #89cff0;
+  --retro-tier-diamond-ink: #0047ab;
+  --retro-tier-diamond-card: linear-gradient(135deg, #ffffff 0%, #e0f7ff 100%);
+
+  --retro-tier-platinum-from: #e5e4e2;
+  --retro-tier-platinum-to: #c0c0c0;
+  --retro-tier-platinum-ink: #4a4a4a;
+  --retro-tier-platinum-card: linear-gradient(135deg, #ffffff 0%, #e5e4e2 100%);
+
+  --retro-tier-gold-from: #ffd700;
+  --retro-tier-gold-to: #ffa500;
+  --retro-tier-gold-ink: #8b4513;
+  --retro-tier-gold-card: linear-gradient(135deg, #fff8dc 0%, #fffacd 100%);
+
+  --retro-tier-silver-from: #c0c0c0;
+  --retro-tier-silver-to: #a8a8a8;
+  --retro-tier-silver-ink: #2f4f4f;
+  --retro-tier-silver-card: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+
+  --retro-tier-service-from: #98fb98;
+  --retro-tier-service-to: #00fa9a;
+  --retro-tier-service-ink: #006400;
+  --retro-tier-service-card: linear-gradient(135deg, #f5fff5 0%, #e8f8e8 100%);
+
+  /* --------------------------------------------------------------------
+     SCHEDULE TRACK TINTS
+     Five pastel washes that let a reader follow one room down the table.
+     -------------------------------------------------------------------- */
+  --retro-track-1: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  --retro-track-2: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  --retro-track-3: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+  --retro-track-4: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  --retro-track-5: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+
+  /* Schedule row states. */
+  --retro-schedule-special: linear-gradient(135deg, #ffe082 0%, #ffd54f 100%);
+  --retro-schedule-full-width: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+  --retro-schedule-changeover: linear-gradient(135deg, #bdbdbd 0%, #9e9e9e 100%);
+  --retro-schedule-party: linear-gradient(135deg, #ff4081 0%, #f50057 100%);
+  --retro-schedule-time: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+  --retro-schedule-keynote: linear-gradient(135deg, #ffccbc 0%, #ff8a65 100%);
+  --retro-schedule-lightning: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+
+  /* --------------------------------------------------------------------
+     WINDOWS 95/98 CHROME
+     The greys that made every dialog, toolbar and popup of the era.
+     -------------------------------------------------------------------- */
+  --retro-chrome-face: #c0c0c0;
+  --retro-chrome-light: #dfdfdf;
+  --retro-chrome-highlight: #ffffff;
+  --retro-chrome-shadow: #808080;
+  --retro-chrome-dark: #000000;
+  --retro-chrome-titlebar: linear-gradient(90deg, #000080, #1084d0);
+  --retro-chrome-titlebar-ink: #ffffff;
+
+  /* --------------------------------------------------------------------
+     TYPOGRAPHY
+     Four stacks, each with a distinct role on the original site.
+     -------------------------------------------------------------------- */
+  --retro-font-display: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+  --retro-font-impact: Impact, 'Arial Black', 'Haettenschweiler', sans-serif;
+  --retro-font-mono: 'Courier New', Courier, monospace;
+  --retro-font-system: 'MS Sans Serif', Tahoma, Geneva, Verdana, Arial, sans-serif;
+  --retro-font-serif: 'Times New Roman', Times, serif;
+
+  /* A scale normalised from the seventeen ad-hoc pixel values in the original. */
+  --retro-text-3xs: 9px;
+  --retro-text-2xs: 10px;
+  --retro-text-xs: 11px;
+  --retro-text-sm: 13px;
+  --retro-text-base: 14px;
+  --retro-text-md: 16px;
+  --retro-text-lg: 18px;
+  --retro-text-xl: 20px;
+  --retro-text-2xl: 24px;
+  --retro-text-3xl: 28px;
+  --retro-text-4xl: 32px;
+  --retro-text-5xl: 48px;
+  --retro-text-6xl: 64px;
+
+  --retro-leading-tight: 1.2;
+  --retro-leading-normal: 1.4;
+  --retro-leading-loose: 1.6;
+
+  --retro-tracking-normal: 0;
+  --retro-tracking-wide: 3px;
+  --retro-tracking-wider: 12px;
+  --retro-tracking-widest: 18px;
+
+  /* --------------------------------------------------------------------
+     BEVELS
+     The single most characteristic property of the era. `outset`/`inset`/
+     `ridge`/`groove` are what make a 1997 page look like a 1997 page, so
+     they get first-class tokens instead of being retyped everywhere.
+     -------------------------------------------------------------------- */
+  --retro-bevel-width-thin: 2px;
+  --retro-bevel-width-sm: 3px;
+  --retro-bevel-width-md: 4px;
+  --retro-bevel-width-lg: 5px;
+  --retro-bevel-width-xl: 6px;
+
+  --retro-bevel-outset-gold: var(--retro-bevel-width-md) outset var(--retro-gold);
+  --retro-bevel-outset-gold-lg: var(--retro-bevel-width-lg) outset var(--retro-gold);
+  --retro-bevel-ridge-gold: var(--retro-bevel-width-lg) ridge var(--retro-gold);
+  --retro-bevel-ridge-gold-md: var(--retro-bevel-width-md) ridge var(--retro-gold);
+  --retro-bevel-groove-magenta: var(--retro-bevel-width-md) groove var(--retro-magenta);
+  --retro-bevel-groove-lime: var(--retro-bevel-width-md) groove var(--retro-lime);
+  --retro-bevel-dashed-magenta: var(--retro-bevel-width-sm) dashed var(--retro-magenta);
+  --retro-bevel-dashed-red: var(--retro-bevel-width-lg) dashed var(--retro-red);
+  --retro-bevel-dashed-lime: var(--retro-bevel-width-thin) dashed var(--retro-lime);
+  --retro-bevel-solid-navy: var(--retro-bevel-width-md) solid var(--retro-navy);
+
+  /* Windows chrome bevels — the raised/pressed button pair. */
+  --retro-bevel-chrome-raised: var(--retro-bevel-width-thin) outset var(--retro-chrome-highlight);
+  --retro-bevel-chrome-pressed: var(--retro-bevel-width-thin) inset var(--retro-chrome-highlight);
+  --retro-bevel-chrome-window: var(--retro-bevel-width-sm) outset var(--retro-chrome-light);
+
+  /* --------------------------------------------------------------------
+     GLOWS & SHADOWS
+     -------------------------------------------------------------------- */
+  --retro-glow-gold: 0 0 20px rgba(255, 215, 0, 0.8);
+  --retro-glow-gold-strong: 0 0 30px rgba(255, 215, 0, 0.8),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+  --retro-glow-yellow: 0 0 20px var(--retro-yellow);
+  --retro-glow-cyan: 0 0 20px #89cff0;
+  --retro-glow-magenta: 0 0 20px rgba(255, 0, 128, 0.8);
+  --retro-shadow-drop: 0 5px 15px rgba(0, 0, 0, 0.5);
+  --retro-shadow-drop-lg: 0 10px 25px rgba(0, 0, 0, 0.7);
+  --retro-shadow-hard: 2px 2px 0 var(--retro-black);
+  --retro-shadow-window: 4px 4px 0 var(--retro-black), 8px 8px 20px rgba(0, 0, 0, 0.5);
+
+  /* Layered text glow — the five-stop recipe behind the main page title. */
+  --retro-text-glow: 0 0 10px var(--retro-yellow), 0 0 20px var(--retro-yellow),
+    0 0 30px var(--retro-magenta), 0 0 40px var(--retro-magenta),
+    2px 2px 4px var(--retro-black);
+  /* Hard offset stack — the "chromatic" print-misregistration look. */
+  --retro-text-offset: 2px 2px var(--retro-yellow), 4px 4px var(--retro-black);
+  --retro-text-chroma: 2px 2px 0 var(--retro-magenta), 4px 4px 0 var(--retro-cyan),
+    6px 6px 10px rgba(0, 0, 0, 0.8);
+
+  /* --------------------------------------------------------------------
+     MOTION
+     Durations and easings as actually used. `steps(2, start)` is what makes
+     a blink read as a hard on/off rather than a fade.
+     -------------------------------------------------------------------- */
+  --retro-duration-instant: 0.2s;
+  --retro-duration-fast: 0.3s;
+  --retro-duration-quick: 0.5s;
+  --retro-duration-blink: 1s;
+  --retro-duration-normal: 1.5s;
+  --retro-duration-slow: 2s;
+  --retro-duration-slower: 3s;
+  --retro-duration-glide: 8s;
+
+  --retro-ease-linear: linear;
+  --retro-ease-in-out: ease-in-out;
+  --retro-ease-out: ease-out;
+  --retro-ease-blink: steps(2, start);
+  --retro-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --retro-ease-arc: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* --------------------------------------------------------------------
+     Z-INDEX LADDER
+     The original scattered 9999 → 9999999 across six files with no ordering
+     rationale. These are the same tiers, named and made comparable.
+     -------------------------------------------------------------------- */
+  --retro-z-base: 1;
+  --retro-z-decoration: 100;
+  --retro-z-sticky: 500;
+  --retro-z-widget: 9000;
+  --retro-z-cursor: 9500;
+  --retro-z-mascot: 9800;
+  --retro-z-modal: 10000;
+
+  /* --------------------------------------------------------------------
+     SPACING & LAYOUT
+     -------------------------------------------------------------------- */
+  --retro-space-2xs: 2px;
+  --retro-space-xs: 5px;
+  --retro-space-sm: 10px;
+  --retro-space-md: 15px;
+  --retro-space-lg: 20px;
+  --retro-space-xl: 25px;
+  --retro-space-2xl: 30px;
+  --retro-space-3xl: 40px;
+
+  --retro-radius-none: 0;
+  --retro-radius-sm: 3px;
+  --retro-radius-md: 5px;
+  --retro-radius-lg: 10px;
+
+  --retro-container-width: 1200px;
+
+  /* --------------------------------------------------------------------
+     PAGE SURFACE
+     Themed below; these are the dark (default) values.
+     -------------------------------------------------------------------- */
+  --retro-page-bg: var(--retro-navy);
+  --retro-page-ink: var(--retro-white);
+  --retro-panel-bg: rgba(255, 255, 255, 0.9);
+  --retro-panel-ink: var(--retro-navy);
+}
+
+/* ============================================================================
+   LIGHT THEME
+   ----------------------------------------------------------------------------
+   The original shipped this as ~50 `!important` overrides injected at runtime.
+   Here it is a token swap, so consumer overrides still win and nothing needs
+   `!important` to be themeable.
+   ========================================================================= */
+[data-retro-theme='light'] {
+  --retro-page-bg: #ffffff;
+  --retro-page-ink: var(--retro-navy);
+  --retro-panel-bg: #ffffcc;
+  --retro-panel-ink: var(--retro-navy);
+
+  --retro-gradient-royal: linear-gradient(180deg, #ffcc00, #ff9900);
+  --retro-gradient-sky: linear-gradient(135deg, #ffffcc 0%, #ffff99 100%);
+  --retro-gradient-sunset: linear-gradient(135deg, #ccffcc 0%, #99dd99 100%);
+
+  --retro-link: #cc0000;
+  --retro-link-visited: #990099;
+
+  --retro-text-glow: 2px 2px 0 #ffcc00;
+  --retro-text-offset: 1px 1px 0 #ffcc00;
+}

@@ -1,0 +1,185 @@
+/* === BROWSER BANNER ====================================================== */
+
+.retro-browser-banner {
+  background: var(--retro-gradient-rainbow);
+  background-size: 200% 100%;
+  animation: retro-rainbow-scroll var(--retro-duration-slower)
+    var(--retro-ease-linear) infinite;
+  padding: var(--retro-space-sm);
+  text-align: center;
+  border: var(--retro-bevel-width-sm) solid var(--retro-yellow);
+  margin-bottom: var(--retro-space-lg);
+  box-shadow: var(--retro-glow-yellow);
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-sm);
+}
+
+.retro-browser-banner__text {
+  flex: 1;
+  color: var(--retro-white);
+  font-weight: bold;
+  font-size: var(--retro-text-md);
+  text-shadow: 2px 2px 4px var(--retro-black);
+}
+
+.retro-browser-banner__icon {
+  font-size: var(--retro-text-lg);
+  flex-shrink: 0;
+}
+
+/* === FLASH BANNER ========================================================
+   The "requires Flash 8+" unit. Flash is long dead; the shrine remains. */
+
+.retro-flash-banner {
+  background: var(--retro-gradient-flash);
+  background-size: 200% 200%;
+  animation: retro-gradient-shift var(--retro-duration-slower)
+    var(--retro-ease-in-out) infinite;
+  border: var(--retro-bevel-ridge-gold);
+  padding: var(--retro-space-md);
+  margin-bottom: var(--retro-space-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--retro-glow-magenta), inset 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.retro-flash-banner__content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: var(--retro-space-lg);
+  position: relative;
+  z-index: 2;
+}
+
+.retro-flash-banner__spinner {
+  font-size: 60px;
+  animation: retro-spin-3d var(--retro-duration-slow) var(--retro-ease-linear)
+    infinite;
+  filter: drop-shadow(0 0 10px var(--retro-gold));
+}
+
+.retro-flash-banner__spinner--reverse {
+  animation-name: retro-spin-3d-reverse;
+}
+
+.retro-flash-banner__text-container {
+  flex: 1;
+  text-align: center;
+}
+
+.retro-flash-banner__text {
+  font-size: var(--retro-text-4xl);
+  font-weight: bold;
+  color: var(--retro-yellow);
+  text-shadow: var(--retro-text-chroma);
+  letter-spacing: var(--retro-tracking-wide);
+  animation: retro-bounce-flash var(--retro-duration-normal)
+    var(--retro-ease-in-out) infinite;
+}
+
+.retro-flash-banner__subtext {
+  font-size: var(--retro-text-base);
+  color: var(--retro-cyan);
+  margin-top: var(--retro-space-xs);
+  text-shadow: 1px 1px 2px var(--retro-black);
+  animation: retro-pulse-glow var(--retro-duration-slow) var(--retro-ease-in-out)
+    infinite;
+}
+
+.retro-flash-banner__badge {
+  position: absolute;
+  top: var(--retro-space-xs);
+  right: var(--retro-space-xs);
+  background: var(--retro-chrome-face);
+  color: var(--retro-black);
+  padding: var(--retro-space-xs) var(--retro-space-sm);
+  border: var(--retro-bevel-chrome-raised);
+  font-size: var(--retro-text-xs);
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  font-family: var(--retro-font-system);
+  line-height: var(--retro-leading-tight);
+}
+
+/* === CONSTRUCTION BANNER ================================================= */
+
+.retro-construction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--retro-space-lg);
+  padding: var(--retro-space-lg);
+  background: var(--retro-yellow);
+  border: var(--retro-bevel-dashed-red);
+  margin: var(--retro-space-lg) 0;
+}
+
+.retro-construction__icon {
+  font-size: 60px;
+  line-height: 1;
+  animation: retro-spin var(--retro-duration-slower) var(--retro-ease-linear)
+    infinite;
+}
+
+.retro-construction__text {
+  flex: 1;
+  color: var(--retro-red);
+  font-size: var(--retro-text-2xl);
+  font-weight: bold;
+  text-shadow: var(--retro-shadow-hard);
+}
+
+/* === WEB RING ============================================================ */
+
+.retro-web-ring {
+  text-align: center;
+  padding: var(--retro-space-md);
+}
+
+.retro-web-ring__title {
+  font-size: var(--retro-text-2xl);
+  color: #8b0000;
+  text-shadow: 2px 2px var(--retro-gold);
+  margin: 0;
+}
+
+.retro-web-ring__blurb {
+  font-size: var(--retro-text-base);
+  margin: var(--retro-space-md) 0;
+}
+
+.retro-web-ring__nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--retro-space-md);
+  flex-wrap: wrap;
+  margin-top: var(--retro-space-md);
+}
+
+.retro-web-ring__label {
+  font-size: var(--retro-text-lg);
+  font-weight: bold;
+  min-width: 140px;
+}
+
+.retro-web-ring__members {
+  font-size: var(--retro-text-sm);
+  margin-top: var(--retro-space-md);
+}
+
+@media (max-width: 768px) {
+  .retro-construction {
+    flex-direction: column;
+  }
+
+  .retro-flash-banner__text {
+    font-size: var(--retro-text-xl);
+  }
+
+  .retro-flash-banner__spinner {
+    font-size: var(--retro-text-4xl);
+  }
+}

@@ -1,0 +1,165 @@
+/* === DATE LIST =========================================================== */
+
+.retro-date-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--retro-space-lg);
+  margin-top: var(--retro-space-lg);
+  list-style: none;
+}
+
+.retro-date-item {
+  background: rgba(255, 255, 255, 0.95);
+  border: var(--retro-bevel-groove-magenta);
+  padding: var(--retro-space-md);
+  display: flex;
+  gap: var(--retro-space-md);
+  align-items: center;
+  transition: transform var(--retro-duration-fast);
+}
+
+.retro-date-item:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: var(--retro-glow-yellow);
+}
+
+.retro-date-item__badge {
+  background: linear-gradient(135deg, var(--retro-red), var(--retro-magenta));
+  color: var(--retro-white);
+  padding: var(--retro-space-md);
+  border: var(--retro-bevel-width-sm) solid var(--retro-yellow);
+  font-weight: bold;
+  text-align: center;
+  min-width: 80px;
+  font-size: var(--retro-text-md);
+  line-height: var(--retro-leading-normal);
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.retro-date-item__title {
+  color: var(--retro-magenta);
+  margin-bottom: var(--retro-space-xs);
+  font-size: var(--retro-text-lg);
+}
+
+.retro-date-item__detail {
+  color: var(--retro-navy);
+  font-size: var(--retro-text-base);
+}
+
+/* === BADGE =============================================================== */
+
+.retro-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--retro-space-sm);
+  margin: var(--retro-space-lg) 0;
+}
+
+.retro-badge {
+  background: var(--retro-gold);
+  color: var(--retro-navy);
+  padding: 8px var(--retro-space-md);
+  border: var(--retro-bevel-width-sm) outset var(--retro-gold);
+  font-weight: bold;
+  font-size: var(--retro-text-base);
+  display: inline-block;
+}
+
+.retro-badge--dark {
+  background: linear-gradient(180deg, #333, #1a1a1a);
+  border: 1px solid var(--retro-banner-accent, #cc0000);
+  padding: var(--retro-space-sm) var(--retro-space-sm);
+  font-size: var(--retro-text-xs);
+  font-family: var(--retro-font-system);
+  color: #ff6666;
+  border-radius: var(--retro-radius-sm);
+  text-shadow: 0 0 5px rgba(204, 0, 0, 0.3);
+}
+
+.retro-badge--silver {
+  background: var(--retro-silver);
+  border-color: var(--retro-silver);
+}
+
+/* === VISITOR COUNTER ===================================================== */
+
+.retro-visitor-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--retro-space-md);
+  background: var(--retro-black);
+  border: var(--retro-bevel-groove-lime);
+  padding: var(--retro-space-lg);
+  margin: var(--retro-space-lg) 0;
+  font-size: var(--retro-text-xl);
+  font-weight: bold;
+  color: var(--retro-lime);
+}
+
+.retro-visitor-counter__icon {
+  font-size: var(--retro-text-3xl);
+  animation: retro-blink var(--retro-duration-slow) var(--retro-ease-blink)
+    infinite;
+}
+
+.retro-visitor-counter__display {
+  font-family: var(--retro-font-mono);
+  font-size: var(--retro-text-3xl);
+  color: var(--retro-red);
+  background: var(--retro-black);
+  padding: var(--retro-space-xs) var(--retro-space-md);
+  border: var(--retro-bevel-width-thin) inset var(--retro-red);
+  letter-spacing: var(--retro-tracking-wide);
+}
+
+.retro-visitor-counter__display--spin {
+  animation: retro-counter-spin var(--retro-duration-quick) var(--retro-ease-out);
+}
+
+/* === LEGEND ==============================================================
+   These rules existed in the original stylesheet but no markup ever used
+   them, so the agenda shipped with an unexplained colour code. Recovered
+   here as a real component. */
+
+.retro-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--retro-space-md);
+  padding: var(--retro-space-lg);
+  background: rgba(255, 255, 255, 0.9);
+  border: var(--retro-bevel-dashed-magenta);
+  border-radius: var(--retro-radius-lg);
+  list-style: none;
+}
+
+.retro-legend__item {
+  display: flex;
+  align-items: center;
+  gap: var(--retro-space-sm);
+  font-size: var(--retro-text-base);
+  color: var(--retro-navy);
+  font-weight: bold;
+}
+
+.retro-legend__swatch {
+  width: 40px;
+  height: 40px;
+  border: var(--retro-bevel-width-sm) solid var(--retro-navy);
+  flex-shrink: 0;
+  background: var(--retro-legend-swatch, var(--retro-silver));
+}
+
+@media (max-width: 768px) {
+  .retro-date-list {
+    grid-template-columns: 1fr;
+  }
+
+  .retro-badges {
+    flex-direction: column;
+    align-items: center;
+  }
+}

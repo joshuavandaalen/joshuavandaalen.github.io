@@ -1,0 +1,2048 @@
+{
+  "$generated": "scripts/extract-api.mjs — do not edit by hand",
+  "interfaces": [
+    {
+      "name": "AdwarePopupsProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "ads",
+          "type": "RetroAd[]",
+          "required": false,
+          "description": "Ads to cycle through. Defaults to the ten parody classics.",
+          "default": "classicAds"
+        },
+        {
+          "name": "interval",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds between spawns.",
+          "default": "15000"
+        },
+        {
+          "name": "startDelay",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds before the first one appears.",
+          "default": "15000"
+        },
+        {
+          "name": "maxConcurrent",
+          "type": "number",
+          "required": false,
+          "description": "Cap on simultaneous popups, so the page stays escapable.",
+          "default": "3"
+        },
+        {
+          "name": "sound",
+          "type": "boolean",
+          "required": false,
+          "description": "Play the square-wave \"bloop\" on open.",
+          "default": "true"
+        },
+        {
+          "name": "spawnOnCta",
+          "type": "boolean",
+          "required": false,
+          "description": "Clicking the call to action spawns two more, as adware did.",
+          "default": "true"
+        },
+        {
+          "name": "shuffle",
+          "type": "boolean",
+          "required": false,
+          "description": "Randomise order rather than cycling.",
+          "default": "false"
+        },
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Master switch.",
+          "default": "true"
+        },
+        {
+          "name": "windowTitle",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Title text in the window chrome.",
+          "default": "'Advertisement - Internet Explorer'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/AdwarePopups/AdwarePopups.tsx"
+    },
+    {
+      "name": "AnswerListProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLFieldSetElement>, 'onChange'>"
+      ],
+      "props": [
+        {
+          "name": "legend",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Accessible name for the group — usually the question text.",
+          "default": null
+        },
+        {
+          "name": "hideLegend",
+          "type": "boolean",
+          "required": false,
+          "description": "Visually hide the legend when the question is already a visible heading.",
+          "default": "false"
+        },
+        {
+          "name": "options",
+          "type": "AnswerOptionProps[]",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "value",
+          "type": "string | null",
+          "required": false,
+          "description": "Currently selected option id.",
+          "default": "null"
+        },
+        {
+          "name": "onChange",
+          "type": "(id: string) => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Lock the group once the answer is submitted.",
+          "default": "false"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Shared radio-group name. Generated if omitted.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/AnswerList/AnswerList.tsx"
+    },
+    {
+      "name": "AnswerOptionProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "Stable id, unique within the list.",
+          "default": null
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "The answer text.",
+          "default": null
+        },
+        {
+          "name": "optionKey",
+          "type": "string",
+          "required": false,
+          "description": "Prefix key — A, B, C… Derived from position if omitted.",
+          "default": null
+        },
+        {
+          "name": "state",
+          "type": "AnswerState",
+          "required": false,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/AnswerList/AnswerList.tsx"
+    },
+    {
+      "name": "BadgeProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLSpanElement>"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "BadgeVariant",
+          "required": false,
+          "description": "",
+          "default": "'gold'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Badge/Badge.tsx"
+    },
+    {
+      "name": "BadgeRowProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [],
+      "file": "packages/retro-ui/src/components/Badge/Badge.tsx"
+    },
+    {
+      "name": "BlinkOwnProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "speed",
+          "type": "number",
+          "required": false,
+          "description": "One full on/off cycle, in seconds.",
+          "default": "1"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/typography/Blink.tsx"
+    },
+    {
+      "name": "BrowserBannerProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Custom text. Takes precedence over `preset`.",
+          "default": null
+        },
+        {
+          "name": "preset",
+          "type": "BrowserPreset",
+          "required": false,
+          "description": "",
+          "default": "'netscape'"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Decorative glyphs at either end.",
+          "default": "'🌐'"
+        },
+        {
+          "name": "blink",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        },
+        {
+          "name": "scroll",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/BrowserBanner/BrowserBanner.tsx"
+    },
+    {
+      "name": "ChangeoverRowProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "time",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": "'⏱️ CHANGEOVER'"
+        },
+        {
+          "name": "colSpan",
+          "type": "number",
+          "required": true,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "ConstructionBannerProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "text",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": "'PERPETUALLY UNDER CONSTRUCTION'"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Spinning glyph at both ends.",
+          "default": "'🚧'"
+        },
+        {
+          "name": "blink",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        },
+        {
+          "name": "scroll",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/ConstructionBanner/ConstructionBanner.tsx"
+    },
+    {
+      "name": "ContentBoxOwnProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "variant",
+          "type": "ContentBoxVariant",
+          "required": false,
+          "description": "",
+          "default": "'default'"
+        },
+        {
+          "name": "halo",
+          "type": "boolean",
+          "required": false,
+          "description": "The blurred rainbow bleed behind the panel edge.",
+          "default": "true"
+        },
+        {
+          "name": "pulse",
+          "type": "boolean",
+          "required": false,
+          "description": "Slow breathing scale.",
+          "default": "false"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/ContentBox/ContentBox.tsx"
+    },
+    {
+      "name": "CoolButtonOwnProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "variant",
+          "type": "CoolButtonVariant",
+          "required": false,
+          "description": "",
+          "default": "'fire'"
+        },
+        {
+          "name": "size",
+          "type": "CoolButtonSize",
+          "required": false,
+          "description": "",
+          "default": "'md'"
+        },
+        {
+          "name": "float",
+          "type": "boolean",
+          "required": false,
+          "description": "Bob gently up and down.",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "false"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "description": "Supplying an href renders an `<a>` instead of a `<button>`.\n\nDeclared here rather than left to the element's own props so that\n`<CoolButton href=\"…\">` type-checks without an explicit `as=\"a\"` — the\ncomponent picks the element, so the type has to allow the prop that\ntriggers the choice.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/CoolButton/CoolButton.tsx"
+    },
+    {
+      "name": "DarkModeToggleProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>"
+      ],
+      "props": [
+        {
+          "name": "storageKey",
+          "type": "string",
+          "required": false,
+          "description": "localStorage key.",
+          "default": "'retro-ui-theme'"
+        },
+        {
+          "name": "defaultTheme",
+          "type": "RetroTheme",
+          "required": false,
+          "description": "Theme used before anything is stored.",
+          "default": "'dark'"
+        },
+        {
+          "name": "onChange",
+          "type": "(theme: RetroTheme) => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "",
+          "default": "'MODE:'"
+        },
+        {
+          "name": "position",
+          "type": "'fixed' | 'static'",
+          "required": false,
+          "description": "Fixed top-right (default) or inline.",
+          "default": "'fixed'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/DarkModeToggle/DarkModeToggle.tsx"
+    },
+    {
+      "name": "DateItemProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLLIElement>, 'title'>"
+      ],
+      "props": [
+        {
+          "name": "day",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Top line of the badge, e.g. \"SAT\".",
+          "default": null
+        },
+        {
+          "name": "date",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Bottom line of the badge, e.g. \"FEB 21\".",
+          "default": null
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "detail",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "dateTime",
+          "type": "string",
+          "required": false,
+          "description": "Machine-readable date. Renders a `<time datetime>` so the badge is not\nonly decoration — the original's dates were plain text with a `<br>`.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/DateList/DateList.tsx"
+    },
+    {
+      "name": "DateListProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLUListElement>"
+      ],
+      "props": [],
+      "file": "packages/retro-ui/src/components/DateList/DateList.tsx"
+    },
+    {
+      "name": "FeedbackPanelProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "correct",
+          "type": "boolean",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "verdict",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Overrides the default verdict wording.",
+          "default": null
+        },
+        {
+          "name": "explanation",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Why the answer is what it is.",
+          "default": null
+        },
+        {
+          "name": "reference",
+          "type": "{ label: string; url: string }",
+          "required": false,
+          "description": "Link out to the authoritative documentation.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/FeedbackPanel/FeedbackPanel.tsx"
+    },
+    {
+      "name": "FlashBannerProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'title'>"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "subtitle",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "leftIcon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Spinning glyph on the left.",
+          "default": "'💿'"
+        },
+        {
+          "name": "rightIcon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Spinning glyph on the right — counter-rotates.",
+          "default": "'🎪'"
+        },
+        {
+          "name": "badge",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Corner plugin-requirement chip. Pass `null` to drop it.",
+          "default": "DEFAULT_BADGE"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/FlashBanner/FlashBanner.tsx"
+    },
+    {
+      "name": "FlyingSquirrelProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Seconds for one crossing.",
+          "default": "8"
+        },
+        {
+          "name": "trackHeight",
+          "type": "number",
+          "required": false,
+          "description": "Height of the strip it glides through, in pixels.",
+          "default": "80"
+        },
+        {
+          "name": "paused",
+          "type": "boolean",
+          "required": false,
+          "description": "Freeze it mid-flight.",
+          "default": "false"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/mascots/FlyingSquirrel.tsx"
+    },
+    {
+      "name": "FooterLinksProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLElement>"
+      ],
+      "props": [
+        {
+          "name": "links",
+          "type": "FooterLinkItem[]",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "separator",
+          "type": "string",
+          "required": false,
+          "description": "Character drawn between links.",
+          "default": "'|'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/FooterLinks/FooterLinks.tsx"
+    },
+    {
+      "name": "FullWidthEventProps",
+      "description": "",
+      "extends": [
+        "Omit<TdHTMLAttributes<HTMLTableCellElement>, 'title'>"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "location",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "colSpan",
+          "type": "number",
+          "required": true,
+          "description": "Number of track columns to span.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "GlowingTitleOwnProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "pulse",
+          "type": "boolean",
+          "required": false,
+          "description": "Pulse the glow.",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/typography/GlowingTitle.tsx"
+    },
+    {
+      "name": "KonamiCodeProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "onActivate",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/KonamiCode/KonamiCode.tsx"
+    },
+    {
+      "name": "LegendItemProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLLIElement>"
+      ],
+      "props": [
+        {
+          "name": "swatch",
+          "type": "string",
+          "required": true,
+          "description": "Any CSS colour or gradient.",
+          "default": null
+        },
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Legend/Legend.tsx"
+    },
+    {
+      "name": "LegendProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLUListElement>"
+      ],
+      "props": [],
+      "file": "packages/retro-ui/src/components/Legend/Legend.tsx"
+    },
+    {
+      "name": "MarqueeProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'onScroll'>"
+      ],
+      "props": [
+        {
+          "name": "behavior",
+          "type": "MarqueeBehavior",
+          "required": false,
+          "description": "",
+          "default": "'scroll'"
+        },
+        {
+          "name": "direction",
+          "type": "MarqueeDirection",
+          "required": false,
+          "description": "",
+          "default": "'left'"
+        },
+        {
+          "name": "scrollAmount",
+          "type": "number",
+          "required": false,
+          "description": "Pixels travelled per tick, matching the original attribute's scale — the\nreal element moved `scrollAmount` pixels every `scrollDelay` milliseconds.",
+          "default": "6"
+        },
+        {
+          "name": "scrollDelay",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds between ticks. The element's own default was 85.",
+          "default": "85"
+        },
+        {
+          "name": "loop",
+          "type": "number | 'infinite'",
+          "required": false,
+          "description": "Repetitions, or `'infinite'`.",
+          "default": "'infinite'"
+        },
+        {
+          "name": "pauseOnHover",
+          "type": "boolean",
+          "required": false,
+          "description": "Pause while hovered or focused. On by default: WCAG 2.2.2 requires a way\nto stop motion that starts automatically and runs for more than five\nseconds, which describes every marquee ever written.",
+          "default": "true"
+        },
+        {
+          "name": "paused",
+          "type": "boolean",
+          "required": false,
+          "description": "Pause programmatically.",
+          "default": "false"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Marquee/Marquee.tsx"
+    },
+    {
+      "name": "Maximum90sModeProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Seconds before the chaos subsides. Omit to leave it running.",
+          "default": null
+        },
+        {
+          "name": "onEnd",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/KonamiCode/KonamiCode.tsx"
+    },
+    {
+      "name": "MidiPlayerProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "trackName",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Filename shown in the panel.",
+          "default": "'ddd-theme.mid'"
+        },
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": "'Now Playing:'"
+        },
+        {
+          "name": "pattern",
+          "type": "ChiptunePattern",
+          "required": false,
+          "description": "Pattern to play. Defaults to the 170 BPM happy-hardcore loop.",
+          "default": null
+        },
+        {
+          "name": "volume",
+          "type": "number",
+          "required": false,
+          "description": "Master volume, 0–1.",
+          "default": "0.45"
+        },
+        {
+          "name": "position",
+          "type": "'fixed' | 'static'",
+          "required": false,
+          "description": "Fixed bottom-right (default) or inline.",
+          "default": "'fixed'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/MidiPlayer/MidiPlayer.tsx"
+    },
+    {
+      "name": "NarwhalFlybyProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "interval",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds between flybys.",
+          "default": "180000"
+        },
+        {
+          "name": "firstDelay",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds before the first one.",
+          "default": "10000"
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds to cross the screen.",
+          "default": "4000"
+        },
+        {
+          "name": "rider",
+          "type": "boolean",
+          "required": false,
+          "description": "Show the caped rider.",
+          "default": "true"
+        },
+        {
+          "name": "riderVisor",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Glyph in the rider's visor.",
+          "default": "'◈'"
+        },
+        {
+          "name": "riderArms",
+          "type": "ReactNode",
+          "required": false,
+          "description": "What the rider is holding aloft.",
+          "default": "'🤘'"
+        },
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/mascots/NarwhalFlyby.tsx"
+    },
+    {
+      "name": "NavBarProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLElement>"
+      ],
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Accessible name for the landmark.",
+          "default": "'Main'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/NavBar/NavBar.tsx"
+    },
+    {
+      "name": "NavButtonOwnProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "active",
+          "type": "boolean",
+          "required": false,
+          "description": "Marks the current page — also sets `aria-current`.",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "false"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "description": "Supplying an href renders an `<a>` instead of a `<button>`.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/NavBar/NavBar.tsx"
+    },
+    {
+      "name": "PageContainerProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "asRoot",
+          "type": "boolean",
+          "required": false,
+          "description": "Also apply `.retro-root`, which sets the page font, ink and background.\nOn by default — most pages want the full treatment. Turn it off when\nembedding the kit inside an existing layout you do not want restyled.",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/PageContainer/PageContainer.tsx"
+    },
+    {
+      "name": "ProgressMeterProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'children'>"
+      ],
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "",
+          "default": "100"
+        },
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Text on the left of the bar.",
+          "default": null
+        },
+        {
+          "name": "hint",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Text on the right. Defaults to a percentage.",
+          "default": null
+        },
+        {
+          "name": "segments",
+          "type": "number",
+          "required": false,
+          "description": "Number of blocks in the track.",
+          "default": "20"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/ProgressMeter/ProgressMeter.tsx"
+    },
+    {
+      "name": "RainbowBarProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "height",
+          "type": "number",
+          "required": false,
+          "description": "Bar thickness in pixels.",
+          "default": "10"
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "required": false,
+          "description": "Seconds for one full sweep of the gradient.",
+          "default": "3"
+        },
+        {
+          "name": "colors",
+          "type": "string[]",
+          "required": false,
+          "description": "Override the ramp. Any number of stops works.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/RainbowBar/RainbowBar.tsx"
+    },
+    {
+      "name": "RainbowTextProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLSpanElement>, 'children'>"
+      ],
+      "props": [
+        {
+          "name": "children",
+          "type": "string",
+          "required": true,
+          "description": "Plain text — each character is coloured and animated individually.",
+          "default": null
+        },
+        {
+          "name": "colors",
+          "type": "string[]",
+          "required": false,
+          "description": "",
+          "default": "DEFAULT_COLORS"
+        },
+        {
+          "name": "stagger",
+          "type": "number",
+          "required": false,
+          "description": "Seconds of offset added per character, producing the travelling wave.",
+          "default": "0.1"
+        },
+        {
+          "name": "wave",
+          "type": "boolean",
+          "required": false,
+          "description": "Set false for colour without the vertical bounce.",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/typography/RainbowText.tsx"
+    },
+    {
+      "name": "RetroLinkProps",
+      "description": "",
+      "extends": [
+        "AnchorHTMLAttributes<HTMLAnchorElement>"
+      ],
+      "props": [
+        {
+          "name": "external",
+          "type": "boolean",
+          "required": false,
+          "description": "Add `target=\"_blank\"` plus the `rel` that makes it safe.\n\nThe original site used `target=\"_blank\"` on eighteen links without\n`rel=\"noopener\"`, which hands the opened page a reference back to yours.",
+          "default": "false"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/typography/RetroLink.tsx"
+    },
+    {
+      "name": "RetroProviderProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "forceMotion",
+          "type": "boolean",
+          "required": false,
+          "description": "Opt every animation back in regardless of `prefers-reduced-motion`.",
+          "default": "false"
+        },
+        {
+          "name": "theme",
+          "type": "RetroTheme",
+          "required": false,
+          "description": "`dark` is the navy-starfield house style; `light` is the Notepad look.",
+          "default": "'dark'"
+        },
+        {
+          "name": "target",
+          "type": "'documentElement' | 'none'",
+          "required": false,
+          "description": "Where the theme and force-motion attributes are written. Defaults to the\ndocument element so the reduced-motion policy — which is scoped to\n`:root` — can see them.",
+          "default": "'documentElement'"
+        }
+      ],
+      "file": "packages/retro-ui/src/providers/RetroProvider.tsx"
+    },
+    {
+      "name": "ScheduleCellProps",
+      "description": "",
+      "extends": [
+        "TdHTMLAttributes<HTMLTableCellElement>"
+      ],
+      "props": [
+        {
+          "name": "track",
+          "type": "TrackNumber",
+          "required": false,
+          "description": "Applies one of the five room tints.",
+          "default": null
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "required": false,
+          "description": "Green full-width treatment for all-hands items.",
+          "default": "false"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "ScheduleHeaderProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLTableSectionElement>"
+      ],
+      "props": [
+        {
+          "name": "timeLabel",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Label for the leading time column.",
+          "default": "'⏰ TIME'"
+        },
+        {
+          "name": "tracks",
+          "type": "ReactNode[]",
+          "required": true,
+          "description": "Room/track names, one per column.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "ScheduleRowProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLTableRowElement>"
+      ],
+      "props": [
+        {
+          "name": "variant",
+          "type": "ScheduleRowVariant",
+          "required": false,
+          "description": "",
+          "default": "'default'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "ScheduleTableProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLTableElement>"
+      ],
+      "props": [
+        {
+          "name": "caption",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Accessible table caption. Strongly recommended — a schedule with six\ncolumns is unusable without one, and the original had none.",
+          "default": null
+        },
+        {
+          "name": "hideCaption",
+          "type": "boolean",
+          "required": false,
+          "description": "Hide the caption visually while leaving it for screen readers.",
+          "default": "false"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "ScorePanelProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'children'>"
+      ],
+      "props": [
+        {
+          "name": "score",
+          "type": "number",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "grade",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Overrides the derived grade line.",
+          "default": null
+        },
+        {
+          "name": "breakdown",
+          "type": "ScoreCategory[]",
+          "required": false,
+          "description": "Per-category tally.",
+          "default": "[]"
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/ScorePanel/ScorePanel.tsx"
+    },
+    {
+      "name": "ServiceSponsorSectionProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "category",
+          "type": "ReactNode",
+          "required": true,
+          "description": "What they provided — \"Wi-Fi by:\", \"Coffee Cart by:\".",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Sponsors/Sponsors.tsx"
+    },
+    {
+      "name": "SessionCardProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onClick'>"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "speaker",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "location",
+          "type": "ReactNode",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "variant",
+          "type": "SessionVariant",
+          "required": false,
+          "description": "",
+          "default": "'default'"
+        },
+        {
+          "name": "onSelect",
+          "type": "() => void",
+          "required": false,
+          "description": "Makes the card activatable by mouse and keyboard alike.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "SiteFooterProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLElement>"
+      ],
+      "props": [
+        {
+          "name": "rainbowBars",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/SiteFooter/SiteFooter.tsx"
+    },
+    {
+      "name": "SiteHeaderProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLElement>"
+      ],
+      "props": [
+        {
+          "name": "subtitle",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Scrolling strapline in the black panel below the title.",
+          "default": null
+        },
+        {
+          "name": "rainbowBars",
+          "type": "boolean",
+          "required": false,
+          "description": "Rainbow bars top and bottom.",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/SiteHeader/SiteHeader.tsx"
+    },
+    {
+      "name": "SparkleEmitterProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "interval",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds between sparkles.",
+          "default": "3000"
+        },
+        {
+          "name": "characters",
+          "type": "string[]",
+          "required": false,
+          "description": "Glyphs chosen from at random.",
+          "default": "['✨', '⭐', '💫', '🌟']"
+        },
+        {
+          "name": "initialBurst",
+          "type": "number",
+          "required": false,
+          "description": "Sparkles emitted immediately on mount.",
+          "default": "3"
+        },
+        {
+          "name": "lifetime",
+          "type": "number",
+          "required": false,
+          "description": "Milliseconds each sparkle lives. Must match the CSS animation.",
+          "default": "2000"
+        },
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/SparkleEmitter/SparkleEmitter.tsx"
+    },
+    {
+      "name": "SponsorCardProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLLIElement>"
+      ],
+      "props": [
+        {
+          "name": "name",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "tier",
+          "type": "SponsorTierName",
+          "required": false,
+          "description": "",
+          "default": "'gold'"
+        },
+        {
+          "name": "hoverText",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Blinking text revealed on hover — \"★ CLICK ME! ★\".",
+          "default": null
+        },
+        {
+          "name": "logo",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Logo or mark above the name.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Sponsors/Sponsors.tsx"
+    },
+    {
+      "name": "SponsorGridProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLUListElement>"
+      ],
+      "props": [
+        {
+          "name": "single",
+          "type": "boolean",
+          "required": false,
+          "description": "Single centred column — for a lone top-tier sponsor.",
+          "default": "false"
+        },
+        {
+          "name": "minCardWidth",
+          "type": "number",
+          "required": false,
+          "description": "Minimum card width before the grid rewraps.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Sponsors/Sponsors.tsx"
+    },
+    {
+      "name": "SponsorTierProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLElement>, 'title'>"
+      ],
+      "props": [
+        {
+          "name": "tier",
+          "type": "SponsorTierName",
+          "required": true,
+          "description": "",
+          "default": "'gold'"
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Sponsors/Sponsors.tsx"
+    },
+    {
+      "name": "StarfieldBackgroundProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "density",
+          "type": "number",
+          "required": false,
+          "description": "How many stars to scatter.",
+          "default": "120"
+        },
+        {
+          "name": "starColors",
+          "type": "string[]",
+          "required": false,
+          "description": "Colours drawn from at random.",
+          "default": "['#ffffff', '#ffff00', '#00ffff']"
+        },
+        {
+          "name": "twinkle",
+          "type": "boolean",
+          "required": false,
+          "description": "Twinkle the stars. The original site advertised an animated starfield in\nits README but shipped a static SVG tile and an empty `.stars` div — this\nis the animation that was promised.",
+          "default": "true"
+        },
+        {
+          "name": "stripes",
+          "type": "boolean",
+          "required": false,
+          "description": "The 45° diagonal hatch behind the stars.",
+          "default": "true"
+        },
+        {
+          "name": "seed",
+          "type": "number",
+          "required": false,
+          "description": "Seed the layout so server and client renders agree.",
+          "default": "1997"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/StarfieldBackground/StarfieldBackground.tsx"
+    },
+    {
+      "name": "TextPanelOwnProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "variant",
+          "type": "TextPanelVariant",
+          "required": false,
+          "description": "`intro` — the large translucent body panel.\n`fun`   — the dashed-border aside.\n`note`  — the small italic centred caveat.",
+          "default": "'intro'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/typography/TextPanel.tsx"
+    },
+    {
+      "name": "TimeCellProps",
+      "description": "",
+      "extends": [
+        "ThHTMLAttributes<HTMLTableCellElement>"
+      ],
+      "props": [
+        {
+          "name": "time",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "duration",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Sub-label, e.g. \"(45 min.)\".",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Schedule/Schedule.tsx"
+    },
+    {
+      "name": "TitleSponsorBannerProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "logo",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Wordmark, set in Impact with heavy letter-spacing.",
+          "default": null
+        },
+        {
+          "name": "sublogo",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Smaller monospace line under the wordmark.",
+          "default": null
+        },
+        {
+          "name": "tagline",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Scrolling strapline.",
+          "default": null
+        },
+        {
+          "name": "details",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Body copy under the tagline.",
+          "default": null
+        },
+        {
+          "name": "cta",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Blinking call to action inside the details line.",
+          "default": null
+        },
+        {
+          "name": "badges",
+          "type": "ReactNode[]",
+          "required": false,
+          "description": "Chips along the bottom.",
+          "default": "[]"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "accentColor",
+          "type": "string",
+          "required": false,
+          "description": "Brand colour driving the border glow, wordmark shadow and tagline strip.\nThe original hard-coded one sponsor's red throughout; this is that same\ndesign with the brand pulled out as a variable.",
+          "default": "'#cc0000'"
+        },
+        {
+          "name": "accentBright",
+          "type": "string",
+          "required": false,
+          "description": "Brighter accent used at the peak of each pulse. Derived if omitted.",
+          "default": null
+        },
+        {
+          "name": "accentDark",
+          "type": "string",
+          "required": false,
+          "description": "Darker accent used for the hard drop shadow. Derived if omitted.",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/TitleSponsorBanner/TitleSponsorBanner.tsx"
+    },
+    {
+      "name": "TitleSponsorTierProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLHeadingElement>"
+      ],
+      "props": [
+        {
+          "name": "accentColor",
+          "type": "string",
+          "required": false,
+          "description": "",
+          "default": "'#cc0000'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/TitleSponsorBanner/TitleSponsorBanner.tsx"
+    },
+    {
+      "name": "UnicornCursorProps",
+      "description": "",
+      "extends": [],
+      "props": [
+        {
+          "name": "emoji",
+          "type": "string",
+          "required": false,
+          "description": "The creature itself. Any emoji works.",
+          "default": "'🦄'"
+        },
+        {
+          "name": "trailLength",
+          "type": "number",
+          "required": false,
+          "description": "Number of trail dots.",
+          "default": "20"
+        },
+        {
+          "name": "colors",
+          "type": "string[]",
+          "required": false,
+          "description": "Trail colours, cycled.",
+          "default": "RAINBOW"
+        },
+        {
+          "name": "easing",
+          "type": "number",
+          "required": false,
+          "description": "Follow easing, 0–1. Lower is laggier and more magical; 1 pins it to the\npointer exactly.",
+          "default": "0.12"
+        },
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "required": false,
+          "description": "",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/mascots/UnicornCursor.tsx"
+    },
+    {
+      "name": "VisitorCounterProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "count",
+          "type": "number",
+          "required": true,
+          "description": "The number to display. Pair with `useVisitorCounter` to fetch one.",
+          "default": null
+        },
+        {
+          "name": "digits",
+          "type": "number",
+          "required": false,
+          "description": "Digits to zero-pad to.",
+          "default": "6"
+        },
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Text before the number.",
+          "default": "'You are visitor number:'"
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Blinking glyph at both ends.",
+          "default": "'👁️'"
+        },
+        {
+          "name": "spinOnChange",
+          "type": "boolean",
+          "required": false,
+          "description": "Flip the digits when the value changes.",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/VisitorCounter/VisitorCounter.tsx"
+    },
+    {
+      "name": "WebmasterProps",
+      "description": "",
+      "extends": [
+        "HTMLAttributes<HTMLDivElement>"
+      ],
+      "props": [
+        {
+          "name": "name",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "titles",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Honorifics — \"Keeper of the Sacred HTML\", and so on.",
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "contactPrefix",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Text introducing the email address.",
+          "default": "'For website inquiries, fan mail, or GeoCities tips:'"
+        },
+        {
+          "name": "colophon",
+          "type": "ReactNode",
+          "required": false,
+          "description": "The sign-off — \"Proudly hand-coded in Notepad.exe\".",
+          "default": "'⚡ Proudly hand-coded in Notepad.exe ⚡'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Webmaster/Webmaster.tsx"
+    },
+    {
+      "name": "WebRingProps",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'>"
+      ],
+      "props": [
+        {
+          "name": "name",
+          "type": "ReactNode",
+          "required": true,
+          "description": "Ring name, e.g. \"Melbourne Tech Web Ring\".",
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "required": false,
+          "description": "Blurb under the title.",
+          "default": null
+        },
+        {
+          "name": "members",
+          "type": "string[]",
+          "required": false,
+          "description": "Sibling sites, scrolled along the bottom.",
+          "default": "[]"
+        },
+        {
+          "name": "onPrevious",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "onRandom",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "onNext",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "previousHref",
+          "type": "string",
+          "required": false,
+          "description": "Supply hrefs instead of handlers for a no-JavaScript ring.",
+          "default": null
+        },
+        {
+          "name": "randomHref",
+          "type": "string",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "nextHref",
+          "type": "string",
+          "required": false,
+          "description": "",
+          "default": null
+        }
+      ],
+      "file": "packages/retro-ui/src/components/WebRing/WebRing.tsx"
+    },
+    {
+      "name": "Win95ButtonProps",
+      "description": "",
+      "extends": [
+        "ButtonHTMLAttributes<HTMLButtonElement>"
+      ],
+      "props": [
+        {
+          "name": "tone",
+          "type": "'default' | 'go' | 'stop'",
+          "required": false,
+          "description": "`go` is green, `stop` is red — the play/mute pair.",
+          "default": "'default'"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Window95/Window95.tsx"
+    },
+    {
+      "name": "Window95Props",
+      "description": "",
+      "extends": [
+        "Omit<HTMLAttributes<HTMLDivElement>, 'title'>"
+      ],
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "onMinimize",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "onMaximize",
+          "type": "() => void",
+          "required": false,
+          "description": "",
+          "default": null
+        },
+        {
+          "name": "controls",
+          "type": "boolean",
+          "required": false,
+          "description": "Show the `_ □ X` cluster.",
+          "default": "true"
+        }
+      ],
+      "file": "packages/retro-ui/src/components/Window95/Window95.tsx"
+    }
+  ],
+  "typeAliases": [
+    {
+      "name": "AnswerState",
+      "type": "| 'default' | 'correct' | 'incorrect' | 'revealed' | 'muted'",
+      "description": "How an option should be presented once an answer has been graded.\n\n`revealed` is the right answer surfaced after the reader chose a different\none — visually distinct from `correct`, which means \"you picked this and it\nwas right\"."
+    },
+    {
+      "name": "BadgeVariant",
+      "type": "'gold' | 'silver' | 'dark'",
+      "description": ""
+    },
+    {
+      "name": "ContentBoxVariant",
+      "type": "'default' | 'highlight' | 'gold'",
+      "description": ""
+    },
+    {
+      "name": "CoolButtonSize",
+      "type": "'sm' | 'md' | 'lg'",
+      "description": ""
+    },
+    {
+      "name": "CoolButtonVariant",
+      "type": "'fire' | 'gold' | 'diamond' | 'grass'",
+      "description": ""
+    },
+    {
+      "name": "MarqueeBehavior",
+      "type": "'scroll' | 'alternate' | 'slide'",
+      "description": ""
+    },
+    {
+      "name": "MarqueeDirection",
+      "type": "'left' | 'right' | 'up' | 'down'",
+      "description": ""
+    },
+    {
+      "name": "PolymorphicProps",
+      "type": "TOwnProps & Omit<ComponentPropsWithoutRef<TElement>, keyof TOwnProps | 'as'> & { as?: TElement; }",
+      "description": "Props for a component that can render as a different element via `as`,\nwhile keeping the underlying element's own props typed.\n\nUsed by the components that legitimately need to be either a link or a\nbutton depending on context — `CoolButton` and `NavButton` are both, on the\noriginal site, sometimes an `<a href>` and sometimes a click handler."
+    },
+    {
+      "name": "RetroTheme",
+      "type": "'dark' | 'light'",
+      "description": "Colour theme. Dark is the default — the navy starfield is the house style."
+    },
+    {
+      "name": "ScheduleRowVariant",
+      "type": "| 'session' | 'special' | 'changeover' | 'party'",
+      "description": ""
+    },
+    {
+      "name": "SessionVariant",
+      "type": "'default' | 'keynote' | 'lightning'",
+      "description": ""
+    },
+    {
+      "name": "SponsorTierName",
+      "type": "| 'diamond' | 'platinum' | 'gold' | 'silver' | 'service'",
+      "description": "Sponsor tiers, ordered by how much the logo costs."
+    },
+    {
+      "name": "TextPanelVariant",
+      "type": "'intro' | 'fun' | 'note'",
+      "description": ""
+    },
+    {
+      "name": "TrackNumber",
+      "type": "1 | 2 | 3 | 4 | 5",
+      "description": "The five room-tint columns a schedule can use."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+name: Build the site
+description: >
+  Installs dependencies and builds every workspace, then assembles the full
+  Pages artifact into dist/. Shared by CI and the deploy workflow so the thing
+  that gets verified is byte-for-byte the thing that gets published.
+
+inputs:
+  storybook:
+    description: Build Storybook too. Adds roughly 20s.
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Build the UI kit
+      shell: bash
+      run: npm run build:kit
+
+    - name: Build the documentation site
+      shell: bash
+      run: npm run build:docs
+
+    - name: Build the quiz app
+      shell: bash
+      run: npm run build:quiz
+
+    - name: Build Storybook
+      if: inputs.storybook == 'true'
+      shell: bash
+      run: npm run build:storybook
+
+    - name: Assemble the Pages artifact
+      shell: bash
+      run: |
+        if [ "${{ inputs.storybook }}" = "true" ]; then
+          node scripts/build-pages.mjs
+        else
+          node scripts/build-pages.mjs --skip-storybook
+        fi
